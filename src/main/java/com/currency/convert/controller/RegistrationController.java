@@ -58,6 +58,7 @@ public class RegistrationController {
 		user.setRoles(roles);
 
 		userValidator.validate(user, bindingResult);
+		modelMap.put("countryList", prepareCountryList());
 
 		if (bindingResult.hasErrors()) {
 			return "register";
@@ -72,7 +73,6 @@ public class RegistrationController {
 		} else {
 			modelMap.put("userSaveStatus", "User name already exists");
 		}
-		modelMap.put("countryList", prepareCountryList());
 
 		return "register";
 	}

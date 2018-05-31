@@ -43,7 +43,7 @@ public class User {
 
 	@Temporal(TemporalType.DATE)
 	@NotNull(message = "Date of birth cannot be left blank")
-	@DateTimeFormat(pattern = "dd-MM-yyyy")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date dateOfBirth;
 
 	@NotBlank(message = "Postal address cannot be blank")

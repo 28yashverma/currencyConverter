@@ -19,7 +19,7 @@ public class UserValidator implements Validator {
 	public void validate(Object obj, Errors errors) {
 		User user = (User) obj;
 		if (!user.getPassword().equals(user.getConfirmPassword())) {
-			errors.reject("confirmPassword", "password mismatched");
+			errors.reject("confirmPassword", "password.mismatched");
 		}
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "confirmPassword", "required.password");
 	}

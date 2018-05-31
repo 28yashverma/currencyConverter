@@ -6,11 +6,9 @@ function checkUser(user) {
 		url : "/checkUser/" + user.value,
 		dataType : 'json',
 		success : function(response) {
-			console.log(response);
 			display(response);
 		},
 		error : function(e) {
-			console.log(e.responseText)
 			display(e.responseText);
 		}
 	});
@@ -18,7 +16,6 @@ function checkUser(user) {
 }
 function display(data) {
 	if (data === "user name is available") {
-		console.log("equal");
 		$('#resultCheckUser').html(data);
 	} else {
 		document.getElementById("resultCheckUser").setAttribute("id",

@@ -61,14 +61,15 @@
 			<div id="labels">
 				<form:label path="email">Email : </form:label>
 			</div>
-			<form:input path="email" />
+			<form:input path="email" type="email" />
 			<form:errors path="email" cssClass="error" />
 
 			<br />
 			<div id="labels">
 				<form:label path="dateOfBirth">Date Of Birth(dd-MM-yyyy) : </form:label>
 			</div>
-			<form:input path="dateOfBirth" />
+			<form:input path="dateOfBirth" type="date" id="dateOfBirth"
+				min="1960-03-31" max="2000-03-31" />
 			<form:errors path="dateOfBirth" cssClass="error" />
 
 			<br />
