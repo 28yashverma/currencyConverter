@@ -7,9 +7,12 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.client.RestTemplate;
 
 @Controller
 public class HomeController {
+	
+	RestTemplate restTemplate;
 
 	@GetMapping("/hello")
 	public String hello(Principal principal, ModelMap model) {
