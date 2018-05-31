@@ -5,12 +5,19 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
+import com.currency.convert.enums.Country;
 
 @Entity
 public class User {
@@ -18,19 +25,39 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long userId;
+
+	@NotBlank
 	private String username;
+
+	@NotBlank(message = "Please input valid email address")
+	@Pattern(regexp = "^\\w+@[a-zA-Z_]+?\\.[a-zA-Z]{2,3}$")
 	private String email;
+
+	@NotBlank(message = "Please input valid password")
 	private String password;
-	private String firstName;
-	private String lastName;
+
+	@NotBlank(message = "Please input value")
+	private String confirmPassword;
 
 	@Temporal(TemporalType.DATE)
+	@NotNull(message = "Date of birth cannot be left blank")
 	private Date dateOfBirth;
+
+	@NotBlank(message = "Postal address cannot be blank")
 	private String postalAddress;
+
+	@NotBlank(message = "Please input valid street name")
 	private String street;
+
+	@NotNull(message = "Please input valid zipcode in numerics only")
 	private Integer zipCode;
+
+	@NotBlank(message = "Please input valid city name")
 	private String city;
-	private String country;
+
+	@NotNull(message = "Please input valid country name")
+	@Enumerated(EnumType.STRING)
+	private Country country;
 
 	@ManyToMany(cascade = CascadeType.ALL)
 	private Set<Role> roles;
@@ -75,22 +102,6 @@ public class User {
 		this.password = password;
 	}
 
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
 	public Date getDateOfBirth() {
 		return dateOfBirth;
 	}
@@ -131,111 +142,20 @@ public class User {
 		this.city = city;
 	}
 
-	public String getCountry() {
+	public Country getCountry() {
 		return country;
 	}
 
-	public void setCountry(String country) {
+	public void setCountry(Country country) {
 		this.country = country;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((city == null) ? 0 : city.hashCode());
-		result = prime * result + ((country == null) ? 0 : country.hashCode());
-		result = prime * result + ((dateOfBirth == null) ? 0 : dateOfBirth.hashCode());
-		result = prime * result + ((email == null) ? 0 : email.hashCode());
-		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
-		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
-		result = prime * result + ((password == null) ? 0 : password.hashCode());
-		result = prime * result + ((postalAddress == null) ? 0 : postalAddress.hashCode());
-		result = prime * result + ((street == null) ? 0 : street.hashCode());
-		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
-		result = prime * result + ((username == null) ? 0 : username.hashCode());
-		result = prime * result + ((zipCode == null) ? 0 : zipCode.hashCode());
-		return result;
+	public String getConfirmPassword() {
+		return confirmPassword;
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		User other = (User) obj;
-		if (city == null) {
-			if (other.city != null)
-				return false;
-		} else if (!city.equals(other.city))
-			return false;
-		if (country == null) {
-			if (other.country != null)
-				return false;
-		} else if (!country.equals(other.country))
-			return false;
-		if (dateOfBirth == null) {
-			if (other.dateOfBirth != null)
-				return false;
-		} else if (!dateOfBirth.equals(other.dateOfBirth))
-			return false;
-		if (email == null) {
-			if (other.email != null)
-				return false;
-		} else if (!email.equals(other.email))
-			return false;
-		if (firstName == null) {
-			if (other.firstName != null)
-				return false;
-		} else if (!firstName.equals(other.firstName))
-			return false;
-		if (lastName == null) {
-			if (other.lastName != null)
-				return false;
-		} else if (!lastName.equals(other.lastName))
-			return false;
-		if (password == null) {
-			if (other.password != null)
-				return false;
-		} else if (!password.equals(other.password))
-			return false;
-		if (postalAddress == null) {
-			if (other.postalAddress != null)
-				return false;
-		} else if (!postalAddress.equals(other.postalAddress))
-			return false;
-		if (street == null) {
-			if (other.street != null)
-				return false;
-		} else if (!street.equals(other.street))
-			return false;
-		if (userId == null) {
-			if (other.userId != null)
-				return false;
-		} else if (!userId.equals(other.userId))
-			return false;
-		if (username == null) {
-			if (other.username != null)
-				return false;
-		} else if (!username.equals(other.username))
-			return false;
-		if (zipCode == null) {
-			if (other.zipCode != null)
-				return false;
-		} else if (!zipCode.equals(other.zipCode))
-			return false;
-		return true;
-	}
-
-	@Override
-	public String toString() {
-		return "User [userId=" + userId + ", username=" + username + ", email=" + email + ", password=" + password
-				+ ", firstName=" + firstName + ", lastName=" + lastName + ", dateOfBirth=" + dateOfBirth
-				+ ", postalAddress=" + postalAddress + ", street=" + street + ", zipCode=" + zipCode + ", city=" + city
-				+ ", country=" + country + "]";
+	public void setConfirmPassword(String confirmPassword) {
+		this.confirmPassword = confirmPassword;
 	}
 
 }

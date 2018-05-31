@@ -28,8 +28,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/", "/hello").authenticated().and().formLogin().and().logout()
-				.permitAll();
+		http.authorizeRequests().antMatchers("/", "/hello").authenticated().and().formLogin().loginPage("/login").and()
+				.logout().permitAll();
 	}
 
 	@Override

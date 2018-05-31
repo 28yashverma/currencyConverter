@@ -1,6 +1,7 @@
 package com.currency.convert.service.impls;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -14,6 +15,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.currency.convert.enums.Country;
 import com.currency.convert.model.Role;
 import com.currency.convert.model.User;
 import com.currency.convert.repository.UserRepository;
@@ -34,6 +36,7 @@ public class UserServiceImpl implements UserDetailsService {
 		saveUser();
 		User user = userRepository.findByusername(name);
 
+		System.out.println("Retrieved user : " + user);
 		List<SimpleGrantedAuthority> listOfAuthorities = new ArrayList<>();
 
 		for (Role role : user.getRoles()) {
@@ -54,7 +57,14 @@ public class UserServiceImpl implements UserDetailsService {
 		u.setPassword(passwordEncoder.encode("password"));
 		roles.add(r);
 		u.setRoles(roles);
-
+		u.setCountry(Country.IND);
+		u.setCity("Lucknow");
+		u.setEmail("yeshendra@gmail.com");
+		u.setDateOfBirth(new Date());
+		u.setConfirmPassword("password");
+		u.setPostalAddress("Chinhat Lucknow");
+		u.setZipCode(226028);
+		u.setStreet("Kamta");
 		userRepository.save(u);
 	}
 
