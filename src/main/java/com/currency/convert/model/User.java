@@ -17,6 +17,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import com.currency.convert.enums.Country;
 
 @Entity
@@ -26,7 +28,7 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long userId;
 
-	@NotBlank
+	@NotBlank(message = "Please input user name")
 	private String username;
 
 	@NotBlank(message = "Please input valid email address")
@@ -41,6 +43,7 @@ public class User {
 
 	@Temporal(TemporalType.DATE)
 	@NotNull(message = "Date of birth cannot be left blank")
+	@DateTimeFormat(pattern = "dd-MM-yyyy")
 	private Date dateOfBirth;
 
 	@NotBlank(message = "Postal address cannot be blank")
@@ -156,6 +159,14 @@ public class User {
 
 	public void setConfirmPassword(String confirmPassword) {
 		this.confirmPassword = confirmPassword;
+	}
+
+	@Override
+	public String toString() {
+		return "User [userId=" + userId + ", username=" + username + ", email=" + email + ", password=" + password
+				+ ", confirmPassword=" + confirmPassword + ", dateOfBirth=" + dateOfBirth + ", postalAddress="
+				+ postalAddress + ", street=" + street + ", zipCode=" + zipCode + ", city=" + city + ", country="
+				+ country + ", roles=" + roles + "]";
 	}
 
 }

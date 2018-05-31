@@ -7,10 +7,11 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import com.currency.convert.service.impls.UserServiceImpl;
+import com.currency.convert.service.impls.UserDetailsServiceImpl;
 
 @EnableWebSecurity
 @Configuration
@@ -18,7 +19,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Bean
 	public UserDetailsService userDetailsService() {
-		return new UserServiceImpl();
+		return new UserDetailsServiceImpl();
 	}
 
 	@Bean
@@ -28,17 +29,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
+		http.csrf().disable();
 		http.authorizeRequests().antMatchers("/", "/hello").authenticated().and().formLogin().loginPage("/login").and()
 				.logout().permitAll();
+
+		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+
 	}
 
 	@Override
 	public void configure(AuthenticationManagerBuilder auth) throws Exception {
-		// auth.inMemoryAuthentication().withUser("yeshendra").password("{noop}password").roles("USER");
 		auth.userDetailsService(userDetailsService()).passwordEncoder(bCryptPasswordEncoder());
 	}
 
 	@Override
+	@Bean
 	public AuthenticationManager authenticationManager() throws Exception {
 		return super.authenticationManager();
 	}

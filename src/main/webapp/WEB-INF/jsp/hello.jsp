@@ -8,7 +8,12 @@
 <title>Welcome</title>
 </head>
 <body>
-	<h1>This is hello page</h1>
+	<h1>Welcome : </h1>
+	<c:if test="${not empty username}">
+		${username}
+	</c:if>
+	
+	
 	<form action="/logout" method="post">
 		<button type="submit">Logout</button>
 		<input type="hidden" name="${_csrf.parameterName}"

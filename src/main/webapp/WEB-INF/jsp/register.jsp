@@ -22,6 +22,7 @@
 	<div id="formLogin">
 		<form:form method="post" action="/register"
 			modelAttribute="registrationForm">
+			<div class="error">${userSaveStatus}</div>
 			<div id="labels">
 				<form:label path="username">User name : </form:label>
 			</div>
@@ -50,7 +51,7 @@
 
 			<br />
 			<div id="labels">
-				<form:label path="dateOfBirth">Date Of Birth(mm/dd/yyyy) : </form:label>
+				<form:label path="dateOfBirth">Date Of Birth(dd-MM-yyyy) : </form:label>
 			</div>
 			<form:input path="dateOfBirth" />
 			<form:errors path="dateOfBirth" cssClass="error" />
@@ -92,13 +93,7 @@
 			<form:errors path="zipCode" cssClass="error" />
 
 			<br />
-			<div id="labels">
-				<form:label path="roles">Roles : </form:label>
-			</div>
-			<form:checkboxes path="roles" items="${rolesList}" />
-			<form:errors path="roles" cssClass="error" />
 
-			<br />
 			<button type="submit">Register</button>
 
 			<br />
