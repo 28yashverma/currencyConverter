@@ -9,13 +9,18 @@ import java.util.Set;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.currency.convert.enums.Country;
 import com.currency.convert.model.Role;
@@ -55,7 +60,7 @@ public class RegistrationController {
 		userValidator.validate(user, bindingResult);
 
 		if (bindingResult.hasErrors()) {
-			modelMap.put("countryList", prepareCountryList());
+			return "register";
 		}
 
 		if (userService.findUserByusername(user.getUsername()) == null) {
@@ -64,11 +69,10 @@ public class RegistrationController {
 			modelMap.put("userSaveStatus", "Success in saving user information");
 			modelMap.put("username", user.getUsername());
 			modelMap.put("registrationForm", new User());
-			modelMap.put("countryList", prepareCountryList());
 		} else {
 			modelMap.put("userSaveStatus", "User name already exists");
-			modelMap.put("countryList", prepareCountryList());
 		}
+		modelMap.put("countryList", prepareCountryList());
 
 		return "register";
 	}
@@ -81,6 +85,23 @@ public class RegistrationController {
 		countryList.add(Country.JPA);
 		countryList.add(Country.US);
 		return countryList;
+	}
+
+	@RequestMapping(method = RequestMethod.GET, value = "/checkUser/{username}", produces = "application/json")
+	@ResponseBody
+	public String checkUsernamePresence(@PathVariable(value = "username", required = true) String username) {
+
+		if (username.length() < 0) {
+			return "user name is empty";
+		}
+
+		User u = userService.findUserByusername(username);
+
+		if (u != null) {
+			return "user name is already registered";
+		} else {
+			return "user name is available";
+		}
 	}
 
 }

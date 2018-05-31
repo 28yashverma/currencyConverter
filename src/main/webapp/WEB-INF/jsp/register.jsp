@@ -13,7 +13,22 @@
 	font-style: italic;
 	font-weight: bold;
 }
+
+#resultCheckUser {
+	color: blue;
+	font-style: italic;
+	font-weight: bold;
+}
+
+#resultCheckUserFailed {
+	color: #ff0000;
+	font-style: italic;
+	font-weight: bold;
+}
 </style>
+<script type="text/javascript"
+	src="webjars/jquery/3.3.1-1/jquery.min.js"></script>
+<script type="text/javascript" src="js/script.js"></script>
 </head>
 <body>
 	<h1 id="heading"
@@ -26,9 +41,9 @@
 			<div id="labels">
 				<form:label path="username">User name : </form:label>
 			</div>
-			<form:input path="username" />
+			<form:input path="username" onblur="checkUser(username)" />
 			<form:errors path="username" cssClass="error" />
-
+			<div id="resultCheckUser"></div>
 			<br />
 			<div id="labels">
 				<form:label path="password">Pass word : </form:label>
