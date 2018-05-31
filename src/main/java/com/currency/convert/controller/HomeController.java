@@ -4,6 +4,7 @@ import java.security.Principal;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -11,7 +12,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class HomeController {
 
 	@GetMapping("/hello")
-	public String hello() {
+	public String hello(Principal principal, ModelMap model) {
+		String username = "";
+		if (principal != null) {
+			username = principal.getName();
+			model.addAttribute("username", username);
+		}
 		return "hello";
 	}
 

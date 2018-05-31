@@ -56,7 +56,6 @@ public class RegistrationController {
 
 		if (bindingResult.hasErrors()) {
 			modelMap.put("countryList", prepareCountryList());
-			return "register";
 		}
 
 		if (userService.findUserByusername(user.getUsername()) == null) {
@@ -65,12 +64,13 @@ public class RegistrationController {
 			modelMap.put("userSaveStatus", "Success in saving user information");
 			modelMap.put("username", user.getUsername());
 			modelMap.put("registrationForm", new User());
-			return "register";
+			modelMap.put("countryList", prepareCountryList());
 		} else {
 			modelMap.put("userSaveStatus", "User name already exists");
 			modelMap.put("countryList", prepareCountryList());
-			return "register";
 		}
+
+		return "register";
 	}
 
 	private static List<Country> prepareCountryList() {
