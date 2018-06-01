@@ -14,13 +14,13 @@
 	font-weight: bold;
 }
 
-#resultCheckUser {
+#resultCheckUser, #checkPasswordSuccess {
 	color: blue;
 	font-style: italic;
 	font-weight: bold;
 }
 
-#resultCheckUserFailed {
+#resultCheckUserFailed, #checkPasswordFailed {
 	color: #ff0000;
 	font-style: italic;
 	font-weight: bold;
@@ -46,16 +46,18 @@
 			<div id="resultCheckUser"></div>
 			<br />
 			<div id="labels">
-				<form:label path="password">Pass word : </form:label>
+				<form:label path="password">Password : </form:label>
 			</div>
-			<form:input path="password" />
+			<form:input path="password" type="password" />
 			<form:errors path="password" cssClass="error" />
 
 			<br />
 			<div id="labels">
 				<form:label path="confirmPassword">Confirm Password : </form:label>
 			</div>
-			<form:input path="confirmPassword" />
+			<form:input path="confirmPassword" type="password"
+				onblur="checkPassword(confirmPassword, password)" />
+			<div id="checkPassword"></div>
 
 			<br />
 			<div id="labels">

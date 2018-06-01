@@ -24,3 +24,15 @@ function display(data) {
 	}
 
 }
+
+function checkPassword(confirmPassword, password) {
+	if (confirmPassword.value != password.value) {
+		document.getElementById("checkPassword").style.color = "red";
+		$('#checkPassword').html(
+				"Password mismatched, please input correct password");
+	} else {
+		document.getElementById("checkPassword").style.color = "blue";
+		$('#checkPassword').html("Password matched");
+	}
+
+}
