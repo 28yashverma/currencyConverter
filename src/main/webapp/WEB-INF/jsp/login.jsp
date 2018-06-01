@@ -6,6 +6,19 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Login page</title>
 <link href="/css/style.css" rel="stylesheet">
+<style type="text/css">
+#errorMsg {
+	color: #ff0000;
+	font-style: italic;
+	font-weight: bold;
+}
+
+#msg {
+	color: blue;
+	font-style: italic;
+	font-weight: bold;
+}
+</style>
 </head>
 <body>
 	<div id="form">
@@ -14,18 +27,21 @@
 				<label for="loginLbl" class="label">Login :</label>
 			</div>
 
-			<label for="labelUsername" class="label">User name : </label><input
-				type="text" name="username" /> <br> <label for="labelPassword"
-				class="label"> Password : </label><input type="text" name="password" />
-			<br>
+			<div class="form-group ${error != null ? 'has-error' : ''}">
+				<br> <label for="labelUsername" class="label">User name
+					: </label><input type="text" name="username" /> <br> <label
+					for="labelPassword" class="label"> Password : </label><input
+					type="password" name="password" /> <br> <span id="errorMsg">${errorMsg}</span>
 
-			<div id="btnSubmit">
-				<button type="submit" value="Login">Login</button>
+
+				<div id="btnSubmit">
+					<button type="submit" value="Login">Login</button>
+				</div>
+
+				<br> <br> <span id="msg">${msg}</span> <input
+					type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+				<br> <a href="/register">New User!</a>
 			</div>
-
-			<input type="hidden" name="${_csrf.parameterName}"
-				value="${_csrf.token}" /> <br> <a href="/register">New
-				User!</a>
 		</form>
 	</div>
 </body>
