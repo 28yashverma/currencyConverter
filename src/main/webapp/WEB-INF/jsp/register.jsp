@@ -14,13 +14,13 @@
 	font-weight: bold;
 }
 
-#resultCheckUser, #checkPasswordSuccess {
+#resultCheckUser {
 	color: blue;
 	font-style: italic;
 	font-weight: bold;
 }
 
-#resultCheckUserFailed, #checkPasswordFailed {
+#resultCheckUserFailed, #checkPassword {
 	color: #ff0000;
 	font-style: italic;
 	font-weight: bold;
@@ -112,7 +112,7 @@
 
 			<br />
 
-			<button type="submit">Register</button>
+			<button type="submit" id="btn-submit">Register</button>
 
 			<br />
 			<a href="/">Back to login!</a>

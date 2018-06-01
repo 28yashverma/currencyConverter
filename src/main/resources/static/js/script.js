@@ -1,5 +1,4 @@
 function checkUser(user) {
-
 	$.ajax({
 		type : "GET",
 		contentType : "application/json",
@@ -17,22 +16,38 @@ function checkUser(user) {
 function display(data) {
 	if (data === "user name is available") {
 		$('#resultCheckUser').html(data);
+		$('#btn-submit').prop("disabled", false);
 	} else {
 		document.getElementById("resultCheckUser").setAttribute("id",
-				"resultCheckUserFailed");
+			"resultCheckUserFailed");
 		$('#resultCheckUserFailed').html(data);
+		$('#btn-submit').prop("disabled", true);
 	}
 
 }
 
 function checkPassword(confirmPassword, password) {
-	if (confirmPassword.value != password.value) {
-		document.getElementById("checkPassword").style.color = "red";
-		$('#checkPassword').html(
-				"Password mismatched, please input correct password");
-	} else {
-		document.getElementById("checkPassword").style.color = "blue";
-		$('#checkPassword').html("Password matched");
-	}
+	var data = {};
+	data["password"] = password.value;
+	data["confirmPassword"] = confirmPassword.value;
+
+	$.ajax({
+		type : "POST",
+		contentType : "application/json",
+		url : "/passwordValidate",
+		data : JSON.stringify(data),
+		dataType : 'json',
+		timeout : 600000,
+		success : function(data) {
+			$('#checkPassword').html(data);
+			$('#btn-submit').prop("disabled", true);
+
+			if (data.length === 0) {
+				$('#btn-submit').prop("disabled", false);
+			}
+
+		},
+		error : function(e) {}
+	});
 
 }
