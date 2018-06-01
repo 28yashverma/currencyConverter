@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -31,8 +32,8 @@ public class User {
 	@NotBlank(message = "Please input user name")
 	private String username;
 
+	@Email
 	@NotBlank(message = "Please input valid email address")
-	@Pattern(regexp = "^\\w+@[a-zA-Z_]+?\\.[a-zA-Z]{2,3}$")
 	private String email;
 
 	@NotBlank(message = "Please input valid password")
