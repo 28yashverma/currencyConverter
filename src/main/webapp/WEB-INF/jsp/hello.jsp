@@ -25,7 +25,7 @@
 
 	<br>
 	<div id="latestRates">
-		<button type="submit" onclick="getData('latest')">Latest :</button>
+		<button type="submit" onclick="getData('latest')" id="btnLatest">Latest :</button>
 		<div id="textLatestRates">
 			<textarea rows="10" cols="16" id="latestRates"></textarea>
 		</div>
@@ -59,7 +59,7 @@
 		<div>
 			<label for="Result">Result : </label>
 			<div>
-				<h2></h2>
+				<h2 id="resultAmountConverted"></h2>
 			</div>
 		</div>
 	</div>

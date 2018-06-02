@@ -28,6 +28,14 @@ public class CurrencyConverterController {
 	@Value("${apicurrencies}")
 	private String apiGetCurrenciesList;
 
+	@Value("${api.key}")
+	private String apiKey;
+
+	@Value("${apiCurrenciesConvert}")
+	private String apiCurrencyConvert;
+
+	private static final String _separator = "/";
+
 	@ResponseBody
 	@GetMapping("/latest")
 	public CurrencyExchange getLatestRates(ModelMap modelMap) {
@@ -45,17 +53,17 @@ public class CurrencyConverterController {
 	public String convertedCurrency(@PathVariable String amount, @PathVariable String fromCurrency,
 			@PathVariable String toCurrency) {
 		String result = "";
-		System.out.println(amount);
-		System.out.println(fromCurrency);
-		System.out.println(toCurrency);
-
-		if (result.isEmpty()) {
+		if (amount.isEmpty()) {
 			throw new IllegalArgumentException("Amount cannot be empty");
 		}
 
 		if (fromCurrency.equalsIgnoreCase(toCurrency)) {
 			throw new IllegalArgumentException("Same level currencies cannot be converted as they yield same values");
 		}
+
+		result = restTemplate.getForEntity(
+				apiCurrencyConvert + amount + _separator + fromCurrency + _separator + toCurrency + "?app_id=" + apiKey,
+				String.class).getBody();
 
 		return result;
 	}

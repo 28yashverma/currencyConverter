@@ -54,6 +54,9 @@ function checkPassword(confirmPassword, password) {
 }
 
 function getData(passedVal) {
+	var btnLatest = $('#btnLatest');
+	btnLatest.prop("disabled", true);
+
 	$.ajax({
 		type : "GET",
 		contentType : "application/json",
@@ -62,9 +65,11 @@ function getData(passedVal) {
 		success : function(response) {
 			var rates = response.rates;
 			showData(rates);
+			btnLatest.prop("disabled", false);
 		},
 		error : function(e) {
 			console.log(e.responseText);
+			btnLatest.prop("disabled", false);
 		}
 	});
 }
@@ -113,6 +118,7 @@ function convert(istrue) {
 	}
 
 	if (status) {
+		buttonId.prop("disabled", true);
 		$.ajax({
 			type : "GET",
 			contentType : "application/json",
@@ -121,9 +127,14 @@ function convert(istrue) {
 			dataType : 'json',
 			success : function(response) {
 				console.log(response);
+				buttonId.prop("disabled", false);
 			},
 			error : function(e) {
-				console.log(e.responseText);
+				console.log(e.responseJSON);
+				if (e.responseJSON.code === "500") {
+					alert(e.responseJSON.message)
+				}
+				buttonId.prop("disabled", false);
 			}
 		});
 	}
