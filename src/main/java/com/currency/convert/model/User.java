@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -33,6 +34,7 @@ public class User {
 
 	@Email
 	@NotBlank(message = "Please input valid email address")
+	@Column(unique = true)
 	private String email;
 
 	@NotBlank(message = "Please input valid password")
