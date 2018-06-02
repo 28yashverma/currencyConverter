@@ -36,17 +36,30 @@
 		<div>
 			<label>Amount : </label>
 			<div>
-				<input type="text" name="amount">
+				<input type="text" name="amount" id="amount" onchange="convert(false)">
 			</div>
 			<label>From : </label>
 			<div>
-				<select name="groupid" class="select-group" id="selectCountries">
+				<select name="groupid" class="select-group" id="selectCountries1"
+					onblur="convert(false)">
 					<option value="0" selected>(Please select an option)</option>
 				</select>
 			</div>
 			<label>To : </label>
 			<div>
-				<input type="text" name="to">
+				<select name="groupid" class="select-group" id="selectCountries2"
+					onblur="convert(false)">
+					<option value="0" selected>(Please select an option)</option>
+				</select>
+			</div>
+		</div>
+		<div>
+			<button type="submit" id="convertAmount" onclick="convert(true)">Convert</button>
+		</div>
+		<div>
+			<label for="Result">Result : </label>
+			<div>
+				<h2></h2>
 			</div>
 		</div>
 	</div>

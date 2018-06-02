@@ -74,9 +74,8 @@ function showData(dataToDisplay) {
 }
 
 function loadStaticData() {
-	debugger;
 	var currenciesList = [];
-	var selectField = $('#selectCountries');
+	var selectField = $('.select-group');
 	var options = '';
 	selectField.empty();
 
@@ -86,7 +85,6 @@ function loadStaticData() {
 		url : "/currencies",
 		dataType : 'json',
 		success : function(response) {
-			debugger;
 			console.log(response);
 			currenciesList = response;
 			for (var i = 0; i < currenciesList.length; i++) {
@@ -99,5 +97,35 @@ function loadStaticData() {
 			console.log(e.responseText);
 		}
 	});
+}
+
+function convert(istrue) {
+	var amount = $('#amount').val();
+	var selectCountry_1 = $('#selectCountries1').val();
+	var selectCountry_2 = $('#selectCountries2').val();
+	var buttonId = $('#convertAmount');
+	var status = istrue;
+
+	if (selectCountry_1 === selectCountry_2 || isNaN(amount)) {
+		buttonId.prop("disabled", true);
+	} else {
+		buttonId.prop("disabled", false);
+	}
+
+	if (status) {
+		$.ajax({
+			type : "GET",
+			contentType : "application/json",
+			url : "/convert/" + amount + "/" + selectCountry_1 + "/"
+					+ selectCountry_2,
+			dataType : 'json',
+			success : function(response) {
+				console.log(response);
+			},
+			error : function(e) {
+				console.log(e.responseText);
+			}
+		});
+	}
 
 }
