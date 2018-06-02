@@ -9,8 +9,6 @@ import java.util.Set;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
@@ -30,7 +28,6 @@ import com.currency.convert.service.UserService;
 import com.currency.convert.validator.UserValidator;
 
 @Controller
-@PropertySource("classpath:api.properties")
 public class RegistrationController {
 
 	@Autowired
@@ -38,16 +35,6 @@ public class RegistrationController {
 
 	@Autowired
 	private UserValidator userValidator;
-
-	@Value("${api.baseUrl}")
-	private String apiUrl;
-
-	@ResponseBody
-	@GetMapping("/hi")
-	public String sayHello() {
-		System.out.println(apiUrl);
-		return "sarying hello";
-	}
 
 	@GetMapping("/register")
 	public String register(Map<String, Object> model) {

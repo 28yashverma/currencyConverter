@@ -19,7 +19,7 @@ function display(data) {
 		$('#btn-submit').prop("disabled", false);
 	} else {
 		document.getElementById("resultCheckUser").setAttribute("id",
-			"resultCheckUserFailed");
+				"resultCheckUserFailed");
 		$('#resultCheckUserFailed').html(data);
 		$('#btn-submit').prop("disabled", true);
 	}
@@ -47,7 +47,57 @@ function checkPassword(confirmPassword, password) {
 			}
 
 		},
-		error : function(e) {}
+		error : function(e) {
+		}
+	});
+
+}
+
+function getData(passedVal) {
+	$.ajax({
+		type : "GET",
+		contentType : "application/json",
+		url : "/" + passedVal + "/",
+		dataType : 'json',
+		success : function(response) {
+			var rates = response.rates;
+			showData(rates);
+		},
+		error : function(e) {
+			console.log(e.responseText);
+		}
+	});
+}
+
+function showData(dataToDisplay) {
+	$('textarea#latestRates').val(JSON.stringify(dataToDisplay));
+}
+
+function loadStaticData() {
+	debugger;
+	var currenciesList = [];
+	var selectField = $('#selectCountries');
+	var options = '';
+	selectField.empty();
+
+	$.ajax({
+		type : "GET",
+		contentType : "application/json",
+		url : "/currencies",
+		dataType : 'json',
+		success : function(response) {
+			debugger;
+			console.log(response);
+			currenciesList = response;
+			for (var i = 0; i < currenciesList.length; i++) {
+				options += '<option value="' + currenciesList[i] + '">'
+						+ currenciesList[i] + '</option>';
+			}
+			selectField.append(options);
+		},
+		error : function(e) {
+			console.log(e.responseText);
+		}
 	});
 
 }

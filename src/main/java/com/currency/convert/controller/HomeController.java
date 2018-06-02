@@ -3,16 +3,11 @@ package com.currency.convert.controller;
 import java.security.Principal;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.client.RestTemplate;
 
 @Controller
 public class HomeController {
-	
-	RestTemplate restTemplate;
 
 	@GetMapping("/hello")
 	public String hello(Principal principal, ModelMap model) {
@@ -21,13 +16,6 @@ public class HomeController {
 			username = principal.getName();
 			model.addAttribute("username", username);
 		}
-		return "hello";
-	}
-
-	@PostMapping("/hello")
-	public String hello(Principal principal, Model model) {
-		String username = "";
-		model.addAttribute("username", username);
 		return "hello";
 	}
 
