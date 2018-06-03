@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.currency.convert.model.Queries;
 
-public interface QueriesRepository extends JpaRepository<Queries, Long> {
+public interface QueriesRepository extends QueriesCustomRepository, JpaRepository<Queries, Long> {
 
 }

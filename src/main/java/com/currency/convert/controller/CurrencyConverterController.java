@@ -82,22 +82,18 @@ public class CurrencyConverterController {
 	@GetMapping("/saveQueries")
 	public void saveQueries(@RequestParam String username, @RequestParam Date date, @RequestParam String fromCurrency,
 			@RequestParam String toCurrency, @RequestParam BigDecimal rate, @RequestParam String result) {
-		Queries queries = new QueriesBuilder()
-				.setQueryUsername(username)
-				.setQueriedDate(date)
-				.setFromCurrency(fromCurrency)
-				.setToCurrency(toCurrency)
-				.setRate(rate)
-				.setResult(result)
-				.build();
+		Queries queries = new QueriesBuilder().setQueryUsername(username).setQueriedDate(date)
+				.setFromCurrency(fromCurrency).setToCurrency(toCurrency).setRate(rate).setResult(result).build();
 		queriesService.saveQuery(queries);
 	}
 
-	@GetMapping("/list")
-	public List<Queries> listQueries() {
-		
-		return null;
-
+	@GetMapping("/list/{username}")
+	@ResponseBody
+	public List<Queries> listQueries(@PathVariable(name = "username") String username) throws Exception {
+		if (username.isEmpty()) {
+			throw new Exception("User name is empty");
+		}
+		return queriesService.listOfQueries(username);
 	}
 
 }

@@ -63,5 +63,8 @@
 			</div>
 		</div>
 	</div>
+	
+	<h3>History of queries : </h3>
+	<textarea rows="10" cols="100"></textarea>
 </body>
 </html>
