@@ -1,4 +1,8 @@
 function checkUser(user) {
+	if (!isNaN(user.value)) {
+		toastr.error("User cannot be a number")
+		return;
+	}
 	$.ajax({
 		type : "GET",
 		contentType : "application/json",
@@ -12,6 +16,59 @@ function checkUser(user) {
 		}
 	});
 
+}
+
+function checkEmail(email) {
+	var emailVal = email.value;
+	var re = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+
+	if (email.length == 0) {
+		toastr.error("Email field cannot be left blank")
+		return;
+	}
+
+	if (emailVal.indexOf("@") === -1) {
+		toastr.error("Email should contain @ sign")
+		return;
+	}
+
+	if (emailVal.indexOf(".") === -1) {
+		toastr.error("Email should contain .")
+		return;
+	}
+
+	if (emailVal.indexOf("com") === -1) {
+		toastr.error("Email should end with com")
+		return;
+	}
+
+	if (!re.test(emailVal)) {
+		toastr.error("Email should be in the form of abc@mail.com")
+		return;
+	}
+
+	$('#btn-submit').prop("disabled", false);
+	$.ajax({
+		type : "GET",
+		contentType : "application/json",
+		url : "/checkEmail/" + emailVal,
+		dataType : 'json',
+		success : function(response) {
+			if (response === "") {
+
+			} else {
+				toastr.info(response)
+			}
+		},
+		error : function(e) {
+			if (e.responseText === "") {
+
+			} else {
+				toastr.info(e.responseText)
+				$('#btn-submit').prop("disabled", true);
+			}
+		}
+	});
 }
 
 function display(data) {

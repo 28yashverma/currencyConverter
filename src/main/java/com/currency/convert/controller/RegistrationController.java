@@ -103,4 +103,15 @@ public class RegistrationController {
 		}
 	}
 
+	@ResponseBody
+	@RequestMapping(method = RequestMethod.GET, value = "/checkEmail/{email}", produces = "application/json")
+	public String validateEmail(@PathVariable(value = "email") String email) {
+		String result = "";
+		User u = userService.findUserByEmail(email);
+		if (u != null) {
+			result = "Email already in use";
+		}
+		return result;
+	}
+
 }

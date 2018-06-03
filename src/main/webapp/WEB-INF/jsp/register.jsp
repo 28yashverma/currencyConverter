@@ -44,7 +44,7 @@
 					href="/register">Register</a></li>
 			</ul>
 		</div>
-		<div class="card-body">
+		<div class="card-body" style="text-align: left">
 			<h3 class="card-title">Currency Converter Application</h3>
 			<div>
 				<h2 class="h4 mb-3 font-weight-normal">
@@ -55,94 +55,78 @@
 				<div id="formLogin">
 					<form:form method="post" action="/register"
 						modelAttribute="registrationForm">
-						<div class="error">${userSaveStatus}</div>
+						<div class="error" style="text-align: right;">${userSaveStatus}</div>
 
-						<div>
-							<div id="labels">
-								<form:label path="username">User name : </form:label>
+						<div class="form-row">
+							<div class="form-group col-md-2">
+								<form:input path="username" onchange="checkUser(username)"
+									placeholder="Username" class="form-control" />
+								<form:errors path="username" cssClass="error" />
+								<div id="resultCheckUser"></div>
 							</div>
-							<form:input path="username" onblur="checkUser(username)" />
-							<form:errors path="username" cssClass="error" />
-							<div id="resultCheckUser"></div>
-						</div>
-						<br />
-						<div>
-							<div id="labels">
-								<form:label path="password">Password : </form:label>
+							<div class="form-group col-md-2">
+								<form:input path="password" type="password"
+									placeholder="Password" class="form-control" />
+								<form:errors path="password" cssClass="error" />
 							</div>
-							<form:input path="password" type="password" />
-							<form:errors path="password" cssClass="error" />
-						</div>
-						<br />
-						<div>
-							<div id="labels">
-								<form:label path="confirmPassword">Confirm Password : </form:label>
+							<div class="form-group col-md-2">
+								<form:input path="confirmPassword" type="password"
+									onblur="checkPassword(confirmPassword, password)"
+									class="form-control" placeholder="Confirm Password" />
+								<div id="checkPassword"></div>
 							</div>
-							<form:input path="confirmPassword" type="password"
-								onblur="checkPassword(confirmPassword, password)" />
-							<div id="checkPassword"></div>
 						</div>
-						<br />
-						<div>
-							<div id="labels">
-								<form:label path="email">Email : </form:label>
+						<div class="form-row">
+							<div class="form-group col-md-2">
+								<form:input path="email" type="email" placeholder="Email"
+									class="form-control" onchange="checkEmail(email)" />
+								<form:errors path="email" cssClass="error" />
 							</div>
-							<form:input path="email" type="email" />
-							<form:errors path="email" cssClass="error" />
-						</div>
-						<br />
 
-						<div>
-							<div id="labels">
-								<form:label path="dateOfBirth">Date Of Birth(dd-MM-yyyy) : </form:label>
-							</div>
-							<form:input path="dateOfBirth" type="date" id="dateOfBirth"
-								min="1960-03-31" max="2000-03-31" />
-							<form:errors path="dateOfBirth" cssClass="error" />
 						</div>
-						<br />
-						<div>
-							<div id="labels">
+						<hr>
+						<div class="form-row">
+							<div class="form-group col-md-2">
+								<label>Date of Birth :</label>
+								<form:input path="dateOfBirth" type="date" id="dateOfBirth"
+									min="1960-03-31" max="2000-03-31" class="form-control" />
+								<form:errors path="dateOfBirth" cssClass="error" />
+							</div>
+							<div class="form-group col-md-2">
 								<form:label path="country">Country : </form:label>
+								<form:select path="country" items="${countryList}"
+									class="form-control" />
+								<form:errors path="country" cssClass="error" />
 							</div>
-							<form:select path="country" items="${countryList}" />
-							<form:errors path="country" cssClass="error" />
 						</div>
-						<br />
-						<div>
-							<div id="labels">
-								<form:label path="postalAddress">Postal Address : </form:label>
+						<hr>
+						<div class="form-row">
+							<div class="form-group col-md-2">
+								<form:input path="postalAddress" class="form-control"
+									placeholder="Postal Address" />
+								<form:errors path="postalAddress" cssClass="error" />
 							</div>
-							<form:input path="postalAddress" />
-							<form:errors path="postalAddress" cssClass="error" />
-						</div>
-						<br />
-						<div>
-							<div id="labels">
-								<form:label path="street">Street : </form:label>
+							<div class="form-group col-md-2">
+								<form:input path="street" class="form-control"
+									placeholder="Street" />
+								<form:errors path="street" cssClass="error" />
 							</div>
-							<form:input path="street" />
-							<form:errors path="street" cssClass="error" />
-						</div>
-						<br />
-						<div>
-							<div id="labels">
-								<form:label path="city">City : </form:label>
+							<div class="form-group col-md-2">
+								<form:input path="city" class="form-control" placeholder="City" />
+								<form:errors path="city" cssClass="error" />
 							</div>
-							<form:input path="city" />
-							<form:errors path="city" cssClass="error" />
 						</div>
-						<br />
-						<div>
-							<div id="labels">
-								<form:label path="zipCode">Zipcode : </form:label>
+						<div class="form-row">
+							<div class="form-group col-md-2">
+								<form:input path="zipCode" class="form-control"
+									placeholder="Zipcode" />
+								<form:errors path="zipCode" cssClass="error" />
 							</div>
-							<form:input path="zipCode" />
-							<form:errors path="zipCode" cssClass="error" />
 						</div>
-						<div>
+
+						<div style="text-align: left">
 							<button type="submit" value="Register"
-								class="btn btn-outline-primary">Register</button>
+								class="btn btn-outline-primary" id="btn-submit">Register</button>
 						</div>
 					</form:form>
 				</div>
