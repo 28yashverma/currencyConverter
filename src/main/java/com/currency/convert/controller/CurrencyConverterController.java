@@ -8,12 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import com.currency.convert.model.Currency;
@@ -22,7 +21,7 @@ import com.currency.convert.model.Queries;
 import com.currency.convert.model.builder.QueriesBuilder;
 import com.currency.convert.service.QueriesService;
 
-@Controller
+@RestController
 @PropertySource("api.properties")
 public class CurrencyConverterController {
 
@@ -46,20 +45,17 @@ public class CurrencyConverterController {
 
 	private static final String _separator = "/";
 
-	@ResponseBody
 	@GetMapping("/latest")
 	@Cacheable(value = "latest")
 	public CurrencyExchange getLatestRates(ModelMap modelMap) {
 		return restTemplate.getForEntity(latestExchangeRates, CurrencyExchange.class).getBody();
 	}
 
-	@ResponseBody
 	@GetMapping("/currencies")
 	public List<String> currenciesList() {
 		return Currency.getListOfCurrencies();
 	}
 
-	@ResponseBody
 	@GetMapping("/convert/{amount}/{fromCurrency}/{toCurrency}")
 	public String convertedCurrency(@PathVariable String amount, @PathVariable String fromCurrency,
 			@PathVariable String toCurrency) {
@@ -88,7 +84,6 @@ public class CurrencyConverterController {
 	}
 
 	@GetMapping("/list/{username}")
-	@ResponseBody
 	public List<Queries> listQueries(@PathVariable(name = "username") String username) throws Exception {
 		if (username.isEmpty()) {
 			throw new Exception("User name is empty");

@@ -31,8 +31,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
 		http.csrf().requireCsrfProtectionMatcher(new AntPathRequestMatcher("**/login")).and().authorizeRequests()
-				.antMatchers("/hello").authenticated().and().formLogin().defaultSuccessUrl("/hello").loginPage("/login")
-				.and().logout().permitAll();
+				.antMatchers("/hello", "/latest", "/convert/**", "/currencies", "/saveQueries", "/list/**")
+				.authenticated().and().formLogin().defaultSuccessUrl("/hello").loginPage("/login").and().logout()
+				.permitAll();
 
 	}
 
