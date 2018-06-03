@@ -4,8 +4,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Login page</title>
-<link href="/css/style.css" rel="stylesheet">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Currency Converter Application :</title>
+<link href="css/style.css" rel="stylesheet">
+<link href="css/bootstrap.min.css" rel="stylesheet">
 <style type="text/css">
 #errorMsg {
 	color: #ff0000;
@@ -21,28 +24,60 @@
 </style>
 </head>
 <body>
-	<div id="form">
-		<form action="/login" method="post">
-			<div>
-				<label for="loginLbl" class="label">Login :</label>
-			</div>
-
-			<div class="form-group ${error != null ? 'has-error' : ''}">
-				<br> <label for="labelUsername" class="label">User name
-					: </label><input type="text" name="username" /> <br> <label
-					for="labelPassword" class="label"> Password : </label><input
-					type="password" name="password" /> <br> <span id="errorMsg">${errorMsg}</span>
 
 
-				<div id="btnSubmit">
-					<button type="submit" value="Login">Login</button>
+	<div class="card text-center">
+		<div class="card-header">
+			<ul class="nav nav-tabs card-header-tabs">
+				<li class="nav-item"><a class="nav-link active" href="#">Login</a>
+				</li>
+				<li class="nav-item"><a class="nav-link" href="/register">Register</a>
+				</li>
+			</ul>
+		</div>
+		<div class="card-body">
+			<h3 class="card-title">Currency Converter Application</h3>
+			<form action="/login" method="post" class="form-signin">
+				<div>
+					<h2 class="h4 mb-3 font-weight-normal">
+						<label for="loginLbl" class="label">Login :</label>
+					</h2>
 				</div>
 
-				<br> <br> <span id="msg">${msg}</span> <input
-					type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-				<br> <a href="/register">New User!</a>
-			</div>
-		</form>
+				<div class="form-group ${error != null ? 'has-error' : ''}">
+					<br>
+					<div>
+						<input type="text" name="username" id="inputUsername"
+							placeholder="User name" />
+					</div>
+
+					<br>
+					<div>
+						<input type="password" name="password" id="inputPassword"
+							placeholder="Password" />
+					</div>
+					<br>
+					<div>
+						<span id="errorMsg">${errorMsg}</span>
+					</div>
+
+					<div id="btnSubmit">
+						<button type="submit" value="Login"
+							class="btn btn-outline-primary">Login</button>
+					</div>
+
+					<br>
+					<div>
+						<span id="msg">${msg}</span>
+					</div>
+					<div>
+						<input type="hidden" name="${_csrf.parameterName}"
+							value="${_csrf.token}" />
+					</div>
+					<br>
+				</div>
+			</form>
+		</div>
 	</div>
 </body>
 </html>
