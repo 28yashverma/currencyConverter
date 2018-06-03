@@ -13,20 +13,22 @@ function checkUser(user) {
 	});
 
 }
+
 function display(data) {
 	if (data === "user name is available") {
-		$('#resultCheckUser').html(data);
+		toastr.success(data);
 		$('#btn-submit').prop("disabled", false);
 	} else {
 		document.getElementById("resultCheckUser").setAttribute("id",
 				"resultCheckUserFailed");
-		$('#resultCheckUserFailed').html(data);
+		toastr.error(data);
 		$('#btn-submit').prop("disabled", true);
 	}
 
 }
 
 function checkPassword(confirmPassword, password) {
+	debugger;
 	var data = {};
 	data["password"] = password.value;
 	data["confirmPassword"] = confirmPassword.value;
@@ -39,7 +41,9 @@ function checkPassword(confirmPassword, password) {
 		dataType : 'json',
 		timeout : 600000,
 		success : function(data) {
-			$('#checkPassword').html(data);
+			if (data.length > 0) {
+				toastr.info(data);
+			}
 			$('#btn-submit').prop("disabled", true);
 
 			if (data.length === 0) {
@@ -48,6 +52,7 @@ function checkPassword(confirmPassword, password) {
 
 		},
 		error : function(e) {
+			toastr.error(e.responseText);
 		}
 	});
 
@@ -90,7 +95,6 @@ function loadStaticData() {
 		url : "/currencies",
 		dataType : 'json',
 		success : function(response) {
-			console.log(response);
 			currenciesList = response;
 			for (var i = 0; i < currenciesList.length; i++) {
 				options += '<option value="' + currenciesList[i] + '">'
@@ -138,5 +142,25 @@ function convert(istrue) {
 			}
 		});
 	}
+
+}
+
+function checkLoginUser(user) {
+	$.ajax({
+		type : "GET",
+		contentType : "application/json",
+		url : "/checkLoginUser/" + user.value,
+		dataType : 'json',
+		success : function(response) {
+			if (response === "success") {
+				toastr.info(response);
+			} else {
+				toastr.info(response);
+			}
+		},
+		error : function(e) {
+			toastr.info(e.responseText);
+		}
+	});
 
 }

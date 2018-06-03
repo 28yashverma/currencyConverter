@@ -8,7 +8,12 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Currency Converter Application :</title>
 <link href="css/style.css" rel="stylesheet">
+<script type="text/javascript"
+	src="webjars/jquery/3.3.1-1/jquery.min.js"></script>
+<script type="text/javascript" src="js/script.js"></script>
 <link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/toastr.min.css" rel="stylesheet">
+<script type="text/javascript" src="js/toastr.min.js"></script>
 <style type="text/css">
 #errorMsg {
 	color: #ff0000;
@@ -24,8 +29,6 @@
 </style>
 </head>
 <body>
-
-
 	<div class="card text-center">
 		<div class="card-header">
 			<ul class="nav nav-tabs card-header-tabs">
@@ -45,22 +48,25 @@
 				</div>
 
 				<div class="form-group ${error != null ? 'has-error' : ''}">
-					<br>
-					<div>
-						<input type="text" name="username" id="inputUsername"
-							placeholder="User name" />
-					</div>
+					<center>
+						<br>
+						<div class="col-2">
+							<input type="text" name="username" id="inputUsername"
+								placeholder="User name" class="form-control"
+								onchange="checkLoginUser(username)" />
+						</div>
 
-					<br>
-					<div>
-						<input type="password" name="password" id="inputPassword"
-							placeholder="Password" />
-					</div>
+						<br>
+						<div class="col-2">
+							<input type="password" name="password" id="inputPassword"
+								placeholder="Password" class="form-control" />
+						</div>
+					</center>
 					<br>
 					<div>
 						<span id="errorMsg">${errorMsg}</span>
 					</div>
-
+					<br>
 					<div id="btnSubmit">
 						<button type="submit" value="Login"
 							class="btn btn-outline-primary">Login</button>
