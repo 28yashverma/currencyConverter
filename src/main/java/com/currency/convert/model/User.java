@@ -61,7 +61,7 @@ public class User {
 	private String city;
 
 	@NotNull(message = "Please input valid country name")
-	@Enumerated(EnumType.STRING)
+	@Enumerated(EnumType.ORDINAL)
 	private Country country;
 
 	@ManyToMany(cascade = CascadeType.ALL)

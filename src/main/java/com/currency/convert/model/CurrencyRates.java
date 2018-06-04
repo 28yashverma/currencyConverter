@@ -2,6 +2,10 @@ package com.currency.convert.model;
 
 import java.math.BigDecimal;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class CurrencyRates {
 
 	public CurrencyRates() {
@@ -13,6 +17,7 @@ public class CurrencyRates {
 		this.rate = rate;
 	}
 
+	@Id
 	private String currencyName;
 	private BigDecimal rate;
 

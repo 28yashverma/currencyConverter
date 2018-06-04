@@ -22,6 +22,7 @@ import com.currency.convert.model.CurrencyExchange;
 import com.currency.convert.model.CurrencyRates;
 import com.currency.convert.model.Queries;
 import com.currency.convert.model.builder.QueriesBuilder;
+import com.currency.convert.service.CurrencyRatesService;
 import com.currency.convert.service.QueriesService;
 
 @RestController
@@ -30,6 +31,9 @@ public class CurrencyConverterController {
 
 	@Autowired
 	private QueriesService queriesService;
+
+	@Autowired
+	private CurrencyRatesService currencyRatesService;
 
 	@Autowired
 	private RestTemplate restTemplate;
@@ -80,6 +84,10 @@ public class CurrencyConverterController {
 				break;
 			}
 
+			for (CurrencyRates rates : currencyMap) {
+				currencyRatesService.save(rates);
+			}
+
 		}
 		return currencyMap;
 	}
@@ -90,9 +98,14 @@ public class CurrencyConverterController {
 	}
 
 	@GetMapping("/convert/{amount}/{fromCurrency}/{toCurrency}")
-	public String convertedCurrency(@PathVariable String amount, @PathVariable String fromCurrency,
+	public BigDecimal convertedCurrency(@PathVariable String amount, @PathVariable String fromCurrency,
 			@PathVariable String toCurrency) {
-		String result = "";
+		getLatestRates(new ModelMap());
+		BigDecimal result = BigDecimal.ZERO;
+		BigDecimal currencyRate = BigDecimal.ZERO;
+		BigDecimal localAmount = new BigDecimal(amount);
+		List<CurrencyRates> rates = new ArrayList<>();
+
 		if (amount.isEmpty()) {
 			throw new IllegalArgumentException("Amount cannot be empty");
 		}
@@ -101,9 +114,16 @@ public class CurrencyConverterController {
 			throw new IllegalArgumentException("Same level currencies cannot be converted as they yield same values");
 		}
 
-		result = restTemplate.getForEntity(
-				apiCurrencyConvert + amount + _separator + fromCurrency + _separator + toCurrency + "?app_id=" + apiKey,
-				String.class).getBody();
+		// result = restTemplate.getForEntity(
+		// apiCurrencyConvert + amount + _separator + fromCurrency + _separator
+		// + toCurrency + "?app_id=" + apiKey,
+		// BigDecimal.class).getBody();
+
+		if (result.intValue() == 0) {
+			rates = currencyRatesService.findAll();
+		}
+
+		result = localAmount.multiply(currencyRate);
 
 		return result;
 	}

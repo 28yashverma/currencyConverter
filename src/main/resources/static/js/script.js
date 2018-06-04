@@ -129,8 +129,6 @@ function getData(passedVal) {
 		success : function(response) {
 			latestRatesList = response;
 			for (var i = 0; i < latestRatesList.length; i++) {
-				/*lis += '<li value="' + latestRatesList[i].currencyName + '">'
-				+ latestRatesList[i].currencyName + '</li>';*/
 				lis += latestRatesList[i].currencyName + ":" + latestRatesList[i].rate + "\n";
 			}
 			console.log(lis);

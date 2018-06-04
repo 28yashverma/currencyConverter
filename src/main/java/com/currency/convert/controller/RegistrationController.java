@@ -78,11 +78,11 @@ public class RegistrationController {
 
 	private static List<String> prepareCountryList() {
 		List<String> countryList = new ArrayList<>();
-		countryList.add(Country.AUS.getCountryCodeDescription());
-		countryList.add(Country.GER.getCountryCodeDescription());
-		countryList.add(Country.IND.getCountryCodeDescription());
-		countryList.add(Country.JPY.getCountryCodeDescription());
-		countryList.add(Country.US.getCountryCodeDescription());
+		countryList.add(Country.AUSTRALIA.getCountryCodeDescription());
+		countryList.add(Country.GERMANY.getCountryCodeDescription());
+		countryList.add(Country.INDIA.getCountryCodeDescription());
+		countryList.add(Country.JAPAN.getCountryCodeDescription());
+		countryList.add(Country.USA.getCountryCodeDescription());
 		return countryList;
 	}
 
