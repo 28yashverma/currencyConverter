@@ -41,39 +41,41 @@
 			</div>
 		</div>
 
-		<h3>Convert :</h3>
-		<div id="convert">
-			<div>
-				<label>Amount : </label>
+		<form action="/convert" method="get">
+			<h3>Convert :</h3>
+			<div id="convert">
 				<div>
-					<input type="text" name="amount" id="amount"
-						onchange="convert(false)">
+					<label>Amount : </label>
+					<div>
+						<input type="text" name="amount" id="amount"
+							onchange="convert(false)">
+					</div>
+					<label>From : </label>
+					<div>
+						<select name="groupid" class="select-group" id="selectCountries1"
+							onchange="convert(false)">
+							<option value="0" selected>(Please select an option)</option>
+						</select>
+					</div>
+					<label>To : </label>
+					<div>
+						<select name="groupid" class="select-group" id="selectCountries2"
+							onchange="convert(false)">
+							<option value="0" selected>(Please select an option)</option>
+						</select>
+					</div>
 				</div>
-				<label>From : </label>
 				<div>
-					<select name="groupid" class="select-group" id="selectCountries1"
-						onblur="convert(false)">
-						<option value="0" selected>(Please select an option)</option>
-					</select>
+					<button type="submit" id="convertAmount" onclick="convert(true)">Convert</button>
 				</div>
-				<label>To : </label>
 				<div>
-					<select name="groupid" class="select-group" id="selectCountries2"
-						onblur="convert(false)">
-						<option value="0" selected>(Please select an option)</option>
-					</select>
+					<label for="Result">Result : </label>
+					<div>
+						<h2 id="resultAmountConverted"></h2>
+					</div>
 				</div>
 			</div>
-			<div>
-				<button type="submit" id="convertAmount" onclick="convert(true)">Convert</button>
-			</div>
-			<div>
-				<label for="Result">Result : </label>
-				<div>
-					<h2 id="resultAmountConverted"></h2>
-				</div>
-			</div>
-		</div>
+		</form>
 
 		<h3>History of queries :</h3>
 		<textarea rows="10" cols="100"></textarea>

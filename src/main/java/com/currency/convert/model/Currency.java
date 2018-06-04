@@ -22,6 +22,6 @@ public class Currency {
 		listOfCurrencies.add("INR");
 		listOfCurrencies.add("USD");
 		listOfCurrencies.add("AUD");
-		listOfCurrencies.add("JPA");
+		listOfCurrencies.add("JPY");
 	}
 }

@@ -1,13 +1,18 @@
 function checkUser(user) {
 	if (!isNaN(user.value)) {
-		toastr.error("User cannot be a number")
+		display('User cannot be a number')
+		return;
+	}
+
+	if (user.value.length < 6) {
+		display('User name cannot be of less than 6 characters');
 		return;
 	}
 	$.ajax({
 		type : "GET",
 		contentType : "application/json",
 		url : "/checkUser/" + user.value,
-		dataType : 'json',
+		dataType : 'text',
 		success : function(response) {
 			display(response);
 		},
@@ -22,28 +27,28 @@ function checkEmail(email) {
 	var emailVal = email.value;
 	var re = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 
-	if (email.length == 0) {
-		toastr.error("Email field cannot be left blank")
+	if (emailVal.length <= 12) {
+		showToaster(StatusEnum._ERROR, 'Email cannot be of less that 12 characters')
 		return;
 	}
 
 	if (emailVal.indexOf("@") === -1) {
-		toastr.error("Email should contain @ sign")
+		showToaster(StatusEnum._ERROR, 'Email should have @ sign')
 		return;
 	}
 
 	if (emailVal.indexOf(".") === -1) {
-		toastr.error("Email should contain .")
+		showToaster(StatusEnum._ERROR, 'Email should have .')
 		return;
 	}
 
 	if (emailVal.indexOf("com") === -1) {
-		toastr.error("Email should end with com")
+		showToaster(StatusEnum._ERROR, 'Email should end with com')
 		return;
 	}
 
 	if (!re.test(emailVal)) {
-		toastr.error("Email should be in the form of abc@mail.com")
+		showToaster(StatusEnum._ERROR, 'Email should be of abc@mail.com pattern')
 		return;
 	}
 
@@ -52,33 +57,29 @@ function checkEmail(email) {
 		type : "GET",
 		contentType : "application/json",
 		url : "/checkEmail/" + emailVal,
-		dataType : 'json',
+		dataType : 'text',
 		success : function(response) {
 			if (response === "") {
 
 			} else {
-				toastr.info(response)
+				showToaster(StatusEnum._INFO, response)
+				$('#btn-submit').prop("disabled", true);
 			}
 		},
 		error : function(e) {
-			if (e.responseText === "") {
-
-			} else {
-				toastr.info(e.responseText)
-				$('#btn-submit').prop("disabled", true);
-			}
+			showToaster(StatusEnum._ERROR, e.responseText);
 		}
 	});
 }
 
 function display(data) {
 	if (data === "user name is available") {
-		toastr.success(data);
+		showToaster(StatusEnum._SUCCESS, data);
 		$('#btn-submit').prop("disabled", false);
 	} else {
 		document.getElementById("resultCheckUser").setAttribute("id",
-				"resultCheckUserFailed");
-		toastr.error(data);
+			"resultCheckUserFailed");
+		showToaster(StatusEnum._ERROR, data);
 		$('#btn-submit').prop("disabled", true);
 	}
 
@@ -117,6 +118,7 @@ function checkPassword(confirmPassword, password) {
 function getData(passedVal) {
 	var btnLatest = $('#btnLatest');
 	btnLatest.prop("disabled", true);
+	var lis = '';
 
 	$.ajax({
 		type : "GET",
@@ -124,19 +126,24 @@ function getData(passedVal) {
 		url : "/" + passedVal + "/",
 		dataType : 'json',
 		success : function(response) {
-			var rates = response.rates;
-			showData(rates);
+			latestRatesList = response;
+			for (var i = 0; i < latestRatesList.length; i++) {
+				lis += latestRatesList[i].currencyName + ":" + latestRatesList[i].rate + "\n";
+			}
+			console.log(lis);
+
+			showData(lis);
 			btnLatest.prop("disabled", false);
+
 		},
 		error : function(e) {
-			console.log(e.responseText);
 			btnLatest.prop("disabled", false);
 		}
 	});
 }
 
 function showData(dataToDisplay) {
-	$('textarea#latestRates').val(JSON.stringify(dataToDisplay));
+	$('textarea#latestRates').val(dataToDisplay);
 }
 
 function loadStaticData() {
@@ -154,7 +161,7 @@ function loadStaticData() {
 			currenciesList = response;
 			for (var i = 0; i < currenciesList.length; i++) {
 				options += '<option value="' + currenciesList[i] + '">'
-						+ currenciesList[i] + '</option>';
+					+ currenciesList[i] + '</option>';
 			}
 			selectField.append(options);
 		},
@@ -183,7 +190,7 @@ function convert(istrue) {
 			type : "GET",
 			contentType : "application/json",
 			url : "/convert/" + amount + "/" + selectCountry_1 + "/"
-					+ selectCountry_2,
+				+ selectCountry_2,
 			dataType : 'json',
 			success : function(response) {
 				console.log(response);
@@ -206,17 +213,36 @@ function checkLoginUser(user) {
 		type : "GET",
 		contentType : "application/json",
 		url : "/checkLoginUser/" + user.value,
-		dataType : 'json',
+		dataType : 'text',
 		success : function(response) {
-			if (response === "success") {
-				toastr.info(response);
-			} else {
-				toastr.info(response);
-			}
+			showToaster(StatusEnum._INFO, response)
 		},
 		error : function(e) {
-			toastr.info(e.responseText);
+			showToaster(StatusEnum._ERROR, e.responseText);
 		}
 	});
+}
+
+var StatusEnum = {
+	_INFO : 'info',
+	_ERROR : 'error',
+	_WARN : 'warn',
+	_SUCCESS : 'success'
+}
+
+function showToaster(status, msg) {
+	switch (status) {
+	case StatusEnum._INFO:
+		toastr.info(msg);
+		break;
+	case StatusEnum._ERROR:
+		toastr.error(msg);
+		break;
+	case StatusEnum._WARN:
+		toastr.warn(msg);
+		break;
+	case StatusEnum._SUCCESS:
+		toastr.success(msg);
+	}
 
 }

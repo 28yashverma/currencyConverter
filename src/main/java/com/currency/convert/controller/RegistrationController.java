@@ -76,13 +76,13 @@ public class RegistrationController {
 		return "register";
 	}
 
-	private static List<Country> prepareCountryList() {
-		List<Country> countryList = new ArrayList<>();
-		countryList.add(Country.AUS);
-		countryList.add(Country.GER);
-		countryList.add(Country.IND);
-		countryList.add(Country.JPA);
-		countryList.add(Country.US);
+	private static List<String> prepareCountryList() {
+		List<String> countryList = new ArrayList<>();
+		countryList.add(Country.AUSTRALIA.getCountryCodeDescription());
+		countryList.add(Country.GERMANY.getCountryCodeDescription());
+		countryList.add(Country.INDIA.getCountryCodeDescription());
+		countryList.add(Country.JAPAN.getCountryCodeDescription());
+		countryList.add(Country.USA.getCountryCodeDescription());
 		return countryList;
 	}
 
