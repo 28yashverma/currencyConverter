@@ -85,7 +85,6 @@ function display(data) {
 }
 
 function checkPassword(confirmPassword, password) {
-	debugger;
 	var data = {};
 	data["password"] = password.value;
 	data["confirmPassword"] = confirmPassword.value;

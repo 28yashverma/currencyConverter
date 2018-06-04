@@ -39,6 +39,8 @@
 			</ul>
 		</div>
 		<div class="card-body">
+			<img alt="Curency Converter Logo" src="CurrencyConverterLogo.png"
+				class="img-fluid" height="200" width="200">
 			<h3 class="card-title">Currency Converter Application</h3>
 			<form action="/login" method="post" class="form-signin">
 				<div>
