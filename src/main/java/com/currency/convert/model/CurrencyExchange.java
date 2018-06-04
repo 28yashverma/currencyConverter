@@ -4,18 +4,18 @@ import java.util.Map;
 
 public class CurrencyExchange {
 
-	private String discalimer;
+	private String disclaimer;
 	private String license;
 	private Long timestamp;
 	private String base;
 	private Map<String, Double> rates;
 
 	public String getDiscalimer() {
-		return discalimer;
+		return disclaimer;
 	}
 
 	public void setDiscalimer(String discalimer) {
-		this.discalimer = discalimer;
+		this.disclaimer = discalimer;
 	}
 
 	public String getLicense() {
