@@ -2,7 +2,7 @@ package com.currency.convert.enums;
 
 public enum Country {
 
-	IND("IND", "INDIA"), GER("GER", "GERMANY"), AUS("AUS", "AUSTRALIA"), US("USA", "UNITED STATES"), JPA("JPA",
+	IND("IND", "INDIA"), GER("GER", "GERMANY"), AUS("AUS", "AUSTRALIA"), US("USA", "UNITED STATES"), JPY("JPY",
 			"JAPAN");
 
 	private String countryCode;

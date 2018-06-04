@@ -119,6 +119,7 @@ function checkPassword(confirmPassword, password) {
 function getData(passedVal) {
 	var btnLatest = $('#btnLatest');
 	btnLatest.prop("disabled", true);
+	var lis = '';
 
 	$.ajax({
 		type : "GET",
@@ -126,9 +127,17 @@ function getData(passedVal) {
 		url : "/" + passedVal + "/",
 		dataType : 'json',
 		success : function(response) {
-			var rates = response.rates;
-			showData(rates);
+			latestRatesList = response;
+			for (var i = 0; i < latestRatesList.length; i++) {
+				/*lis += '<li value="' + latestRatesList[i].currencyName + '">'
+				+ latestRatesList[i].currencyName + '</li>';*/
+				lis += latestRatesList[i].currencyName + ":" + latestRatesList[i].rate + "\n";
+			}
+			console.log(lis);
+
+			showData(lis);
 			btnLatest.prop("disabled", false);
+
 		},
 		error : function(e) {
 			btnLatest.prop("disabled", false);
@@ -137,7 +146,7 @@ function getData(passedVal) {
 }
 
 function showData(dataToDisplay) {
-	$('textarea#latestRates').val(JSON.stringify(dataToDisplay));
+	$('textarea#latestRates').val(dataToDisplay);
 }
 
 function loadStaticData() {

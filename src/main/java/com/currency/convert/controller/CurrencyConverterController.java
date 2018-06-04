@@ -1,8 +1,10 @@
 package com.currency.convert.controller;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map.Entry;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -17,6 +19,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.currency.convert.model.Currency;
 import com.currency.convert.model.CurrencyExchange;
+import com.currency.convert.model.CurrencyRates;
 import com.currency.convert.model.Queries;
 import com.currency.convert.model.builder.QueriesBuilder;
 import com.currency.convert.service.QueriesService;
@@ -47,8 +50,38 @@ public class CurrencyConverterController {
 
 	@GetMapping("/latest")
 	@Cacheable(value = "latest")
-	public CurrencyExchange getLatestRates(ModelMap modelMap) {
-		return restTemplate.getForEntity(latestExchangeRates, CurrencyExchange.class).getBody();
+	public List<CurrencyRates> getLatestRates(ModelMap modelMap) {
+		CurrencyExchange exchange = restTemplate.getForEntity(latestExchangeRates, CurrencyExchange.class).getBody();
+		List<CurrencyRates> currencyMap = new ArrayList<>();
+		for (Entry<String, Double> m : exchange.getRates().entrySet()) {
+
+			switch (m.getKey()) {
+			case "EUR":
+				currencyMap.add(new CurrencyRates(m.getKey(), BigDecimal.valueOf(m.getValue())));
+				break;
+
+			case "INR":
+				currencyMap.add(new CurrencyRates(m.getKey(), BigDecimal.valueOf(m.getValue())));
+				break;
+
+			case "USD":
+				currencyMap.add(new CurrencyRates(m.getKey(), BigDecimal.valueOf(m.getValue())));
+				break;
+
+			case "AUD":
+				currencyMap.add(new CurrencyRates(m.getKey(), BigDecimal.valueOf(m.getValue())));
+				break;
+
+			case "JPY":
+				currencyMap.add(new CurrencyRates(m.getKey(), BigDecimal.valueOf(m.getValue())));
+				break;
+
+			default:
+				break;
+			}
+
+		}
+		return currencyMap;
 	}
 
 	@GetMapping("/currencies")
