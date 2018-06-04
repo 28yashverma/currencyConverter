@@ -28,7 +28,8 @@ function checkEmail(email) {
 	var re = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 
 	if (emailVal.length <= 12) {
-		showToaster(StatusEnum._ERROR, 'Email cannot be of less that 12 characters')
+		showToaster(StatusEnum._ERROR,
+				'Email cannot be of less that 12 characters')
 		return;
 	}
 
@@ -48,7 +49,8 @@ function checkEmail(email) {
 	}
 
 	if (!re.test(emailVal)) {
-		showToaster(StatusEnum._ERROR, 'Email should be of abc@mail.com pattern')
+		showToaster(StatusEnum._ERROR,
+				'Email should be of abc@mail.com pattern')
 		return;
 	}
 
@@ -78,7 +80,7 @@ function display(data) {
 		$('#btn-submit').prop("disabled", false);
 	} else {
 		document.getElementById("resultCheckUser").setAttribute("id",
-			"resultCheckUserFailed");
+				"resultCheckUserFailed");
 		showToaster(StatusEnum._ERROR, data);
 		$('#btn-submit').prop("disabled", true);
 	}
@@ -128,7 +130,8 @@ function getData(passedVal) {
 		success : function(response) {
 			latestRatesList = response;
 			for (var i = 0; i < latestRatesList.length; i++) {
-				lis += latestRatesList[i].currencyName + ":" + latestRatesList[i].rate + "\n";
+				lis += latestRatesList[i].currencyName + ":"
+						+ latestRatesList[i].rate + "\n";
 			}
 			console.log(lis);
 
@@ -151,6 +154,7 @@ function loadStaticData() {
 	var selectField = $('.select-group');
 	var options = '';
 	selectField.empty();
+	convert(false);
 
 	$.ajax({
 		type : "GET",
@@ -161,9 +165,22 @@ function loadStaticData() {
 			currenciesList = response;
 			for (var i = 0; i < currenciesList.length; i++) {
 				options += '<option value="' + currenciesList[i] + '">'
-					+ currenciesList[i] + '</option>';
+						+ currenciesList[i] + '</option>';
 			}
 			selectField.append(options);
+		},
+		error : function(e) {
+			console.log(e.responseText);
+		}
+	});
+
+	$.ajax({
+		type : "GET",
+		contentType : "application/json",
+		url : "/loadData",
+		dataType : 'text',
+		success : function(response) {
+			console.log(response);
 		},
 		error : function(e) {
 			console.log(e.responseText);
@@ -190,11 +207,12 @@ function convert(istrue) {
 			type : "GET",
 			contentType : "application/json",
 			url : "/convert/" + amount + "/" + selectCountry_1 + "/"
-				+ selectCountry_2,
+					+ selectCountry_2,
 			dataType : 'json',
 			success : function(response) {
 				console.log(response);
 				buttonId.prop("disabled", false);
+				$('#resultAmountConverted').html(response);
 			},
 			error : function(e) {
 				console.log(e.responseJSON);
@@ -245,4 +263,14 @@ function showToaster(status, msg) {
 		toastr.success(msg);
 	}
 
+}
+
+function myFunction() {
+	var myVar;
+	myVar = setTimeout(showPage, 3000);
+}
+
+function showPage() {
+	document.getElementById("loader").style.display = "none";
+	document.getElementById("myDiv").style.display = "block";
 }
