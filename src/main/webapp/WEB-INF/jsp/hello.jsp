@@ -47,7 +47,7 @@
 						</div>
 						&nbsp;
 						<div id="textLatestRates">
-							<textarea rows="6" cols="10" id="latestRates"
+							<textarea rows="6" cols="15" id="latestRates"
 								class="form-control" style="border: none;"></textarea>
 						</div>
 					</div>
@@ -87,7 +87,7 @@
 				<div class="form-group col-md-4">
 					<h3>History of queries :</h3>
 					<div class="form-control" id="showHistories"
-						style="border: none; width: 600px; height: 500px; overflow: auto;"></div>
+						style="border: none; width: 400px; height: 500px; overflow: auto;"></div>
 				</div>
 			</div>
 		</div>
