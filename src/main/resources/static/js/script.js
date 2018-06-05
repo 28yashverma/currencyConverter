@@ -186,7 +186,7 @@ function loadStaticData() {
 			console.log(e.responseText);
 		}
 	});
-	
+
 	loadHistory()
 }
 
@@ -292,12 +292,12 @@ function loadHistory() {
 		success : function(response) {
 			historyList = response
 			for (var i = 0; i < historyList.length; i++) {
-				lis += '<p class="alert alert-success">' + "Username: " + historyList[i].queryUsername + " " +
-					" queried on date: " + historyList[i].queriedDate + " " +
-					" conversion from: " + historyList[i].fromCurrency + " " +
-					" of amount: " + historyList[i].amount + " " +
-					" to currency: " + historyList[i].toCurrency +
-					" with base rate of: " + historyList[i].rate + " USD " + "\n" + '</p>';
+				lis += '<p class="alert alert-success">' + "Username: " + '<b>' + historyList[i].queryUsername + '</b>' + " " +
+					" queried on date: " + '<b>' + new Date(historyList[i].queriedDate) + '</b>' + " " +
+					" conversion from: " + '<b>' + historyList[i].fromCurrency + '</b>' + " " +
+					" of amount: " + '<b>' + historyList[i].amount + '</b>' + " " +
+					" to currency: " + '<b>' + historyList[i].toCurrency + '</b>' +
+					" resulting converted amount: " + '<b>' + historyList[i].result + '</b>' + '</p>';
 			}
 
 			showHistories.html(lis)

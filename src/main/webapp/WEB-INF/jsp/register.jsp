@@ -119,7 +119,7 @@
 						<div class="form-row">
 							<div class="form-group col-md-2">
 								<form:input path="zipCode" class="form-control"
-									placeholder="Zipcode" />
+									placeholder="Zipcode" type="number"/>
 								<form:errors path="zipCode" cssClass="error" />
 							</div>
 						</div>

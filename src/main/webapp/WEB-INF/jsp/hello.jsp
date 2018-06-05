@@ -86,8 +86,6 @@
 
 				<div class="form-group col-md-4">
 					<h3>History of queries :</h3>
-					<!-- <textarea rows="10" cols="100" class="form-control"
-						style="border: none"></textarea> -->
 					<div class="form-control" id="showHistories"
 						style="border: none; width: 600px; height: 500px; overflow: auto;"></div>
 				</div>
