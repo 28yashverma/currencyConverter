@@ -19,6 +19,8 @@ public class QueriesBuilder {
 
 	private String result;
 
+	private BigDecimal amount;
+
 	public QueriesBuilder setQueryUsername(String queryUsername) {
 		this.queryUsername = queryUsername;
 		return this;
@@ -49,8 +51,13 @@ public class QueriesBuilder {
 		return this;
 	}
 
+	public QueriesBuilder setAmount(BigDecimal amount) {
+		this.amount = amount;
+		return this;
+	}
+
 	public Queries build() {
-		return new Queries(queryUsername, queriedDate, fromCurrency, toCurrency, rate, result);
+		return new Queries(queryUsername, queriedDate, fromCurrency, toCurrency, rate, result, amount);
 	}
 
 }

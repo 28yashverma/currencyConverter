@@ -29,7 +29,7 @@ function checkEmail(email) {
 
 	if (emailVal.length <= 12) {
 		showToaster(StatusEnum._ERROR,
-				'Email cannot be of less that 12 characters')
+			'Email cannot be of less that 12 characters')
 		return;
 	}
 
@@ -50,7 +50,7 @@ function checkEmail(email) {
 
 	if (!re.test(emailVal)) {
 		showToaster(StatusEnum._ERROR,
-				'Email should be of abc@mail.com pattern')
+			'Email should be of abc@mail.com pattern')
 		return;
 	}
 
@@ -80,7 +80,7 @@ function display(data) {
 		$('#btn-submit').prop("disabled", false);
 	} else {
 		document.getElementById("resultCheckUser").setAttribute("id",
-				"resultCheckUserFailed");
+			"resultCheckUserFailed");
 		showToaster(StatusEnum._ERROR, data);
 		$('#btn-submit').prop("disabled", true);
 	}
@@ -131,7 +131,7 @@ function getData(passedVal) {
 			latestRatesList = response;
 			for (var i = 0; i < latestRatesList.length; i++) {
 				lis += latestRatesList[i].currencyName + ":"
-						+ latestRatesList[i].rate + "\n";
+					+ latestRatesList[i].rate + "\n";
 			}
 			console.log(lis);
 
@@ -165,7 +165,7 @@ function loadStaticData() {
 			currenciesList = response;
 			for (var i = 0; i < currenciesList.length; i++) {
 				options += '<option value="' + currenciesList[i] + '">'
-						+ currenciesList[i] + '</option>';
+					+ currenciesList[i] + '</option>';
 			}
 			selectField.append(options);
 		},
@@ -186,6 +186,8 @@ function loadStaticData() {
 			console.log(e.responseText);
 		}
 	});
+	
+	loadHistory()
 }
 
 function convert(istrue) {
@@ -207,12 +209,13 @@ function convert(istrue) {
 			type : "GET",
 			contentType : "application/json",
 			url : "/convert/" + amount + "/" + selectCountry_1 + "/"
-					+ selectCountry_2,
+				+ selectCountry_2,
 			dataType : 'json',
 			success : function(response) {
 				console.log(response);
 				buttonId.prop("disabled", false);
 				$('#resultAmountConverted').html(response);
+				loadHistory();
 			},
 			error : function(e) {
 				console.log(e.responseJSON);
@@ -273,4 +276,35 @@ function myFunction() {
 function showPage() {
 	document.getElementById("loader").style.display = "none";
 	document.getElementById("myDiv").style.display = "block";
+}
+
+
+function loadHistory() {
+	var history = new Object();
+	var lis = '';
+	var showHistories = $('#showHistories');
+
+	$.ajax({
+		type : "GET",
+		contentType : "application/json",
+		url : "/list",
+		dataType : 'json',
+		success : function(response) {
+			historyList = response
+			for (var i = 0; i < historyList.length; i++) {
+				lis += '<p class="alert alert-success">' + "Username: " + historyList[i].queryUsername + " " +
+					" queried on date: " + historyList[i].queriedDate + " " +
+					" conversion from: " + historyList[i].fromCurrency + " " +
+					" of amount: " + historyList[i].amount + " " +
+					" to currency: " + historyList[i].toCurrency +
+					" with base rate of: " + historyList[i].rate + " USD " + "\n" + '</p>';
+			}
+
+			showHistories.html(lis)
+
+		},
+		error : function(e) {
+			showToaster(StatusEnum._ERROR, e.responseText);
+		}
+	});
 }

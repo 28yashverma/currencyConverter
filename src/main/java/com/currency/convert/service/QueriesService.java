@@ -9,11 +9,10 @@ import com.currency.convert.model.Queries;
 public interface QueriesService {
 
 	void saveQuery(String username, Date queriedDate, String currencyFrom, String currencyTo, BigDecimal rate,
-			String result);
+			String result, BigDecimal amount);
 
 	void saveQuery(Queries queries);
-	
+
 	List<Queries> listOfQueries(String username);
-	
 
 }

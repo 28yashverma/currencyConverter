@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 public class Queries {
@@ -15,13 +17,15 @@ public class Queries {
 
 	}
 
-	public Queries(String username, Date date, String fromCurrency, String toCurrency, BigDecimal rate, String result) {
+	public Queries(String username, Date date, String fromCurrency, String toCurrency, BigDecimal rate, String result,
+			BigDecimal amount) {
 		this.queryUsername = username;
 		this.queriedDate = date;
 		this.fromCurrency = fromCurrency;
 		this.toCurrency = toCurrency;
 		this.rate = rate;
 		this.result = result;
+		this.amount = amount;
 	}
 
 	@Id
@@ -30,6 +34,7 @@ public class Queries {
 
 	private String queryUsername;
 
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date queriedDate;
 
 	private String fromCurrency;
@@ -39,6 +44,8 @@ public class Queries {
 	private BigDecimal rate;
 
 	private String result;
+
+	private BigDecimal amount;
 
 	public Long getQueryId() {
 		return queryId;
@@ -88,18 +95,27 @@ public class Queries {
 		this.queryUsername = queryUsername;
 	}
 
-	@Override
-	public String toString() {
-		return "Queries [queryId=" + queryId + ", queriedDate=" + queriedDate + ", fromCurrency=" + fromCurrency
-				+ ", toCurrency=" + toCurrency + ", rate=" + rate + "]";
-	}
-
 	public String getResult() {
 		return result;
 	}
 
 	public void setResult(String result) {
 		this.result = result;
+	}
+
+	public BigDecimal getAmount() {
+		return amount;
+	}
+
+	public void setAmount(BigDecimal amount) {
+		this.amount = amount;
+	}
+
+	@Override
+	public String toString() {
+		return "Queries [queryId=" + queryId + ", queryUsername=" + queryUsername + ", queriedDate=" + queriedDate
+				+ ", fromCurrency=" + fromCurrency + ", toCurrency=" + toCurrency + ", rate=" + rate + ", result="
+				+ result + ", amount=" + amount + "]";
 	}
 
 }

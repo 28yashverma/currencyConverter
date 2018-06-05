@@ -3,6 +3,7 @@ package com.currency.convert.controller;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.security.Principal;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -82,11 +83,15 @@ public class CurrencyConverterController {
 		currencyRate = mapRates.get(toCurrency).divide(mapRates.get(fromCurrency), 3, RoundingMode.FLOOR);
 		result = localAmount.multiply(currencyRate);
 
+		queriesService.saveQuery(principal.getName(), new Date(), fromCurrency, toCurrency, currencyRate,
+				result.toPlainString(), localAmount);
+
 		return result;
 	}
 
-	@GetMapping("/list/{username}")
-	public List<Queries> listQueries(@PathVariable(name = "username") String username) throws Exception {
+	@GetMapping("/list")
+	public List<Queries> listQueries(Principal principal) throws Exception {
+		String username = principal.getName();
 		if (username.isEmpty()) {
 			throw new Exception("User name is empty");
 		}
