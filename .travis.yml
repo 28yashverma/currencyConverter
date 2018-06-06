@@ -14,4 +14,6 @@ deploy:
    api: https://api.run.pivotal.io
    organization: currency-converter-application
    space: development
-   buildpack: java_buildpack
+   buildpack: https://github.com/cloudfoundry/java-buildpack
+   file: java_buildpack
+   path: .
