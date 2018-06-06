@@ -11,4 +11,4 @@ deploy:
   provider: heroku
   api_key:
     secure: 1064d52f-7372-481f-88d0-3eb6ceedfd23
-  app: currency-converter-app
+  app: currency-co
