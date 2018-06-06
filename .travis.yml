@@ -14,4 +14,4 @@ deploy:
    api: https://api.run.pivotal.io
    organization: currency-converter-application
    space: development
-   file: java_buildpack
+   buildpack: java_buildpack
