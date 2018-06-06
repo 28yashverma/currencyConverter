@@ -15,5 +15,3 @@ deploy:
    organization: currency-converter-application
    space: development
    buildpack: https://github.com/cloudfoundry/java-buildpack
-   file: java_buildpack
-   path: .
