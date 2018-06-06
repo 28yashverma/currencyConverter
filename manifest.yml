@@ -1,2 +1,2 @@
 applications:
-  -name: currencyConverterApp
+- name: currency-converter-application
