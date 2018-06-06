@@ -53,7 +53,7 @@
 					</div>
 					<hr>
 					<div class="form-row">
-						<form action="/convert" method="get">
+						<form>
 							<h3>Convert :</h3>
 							<div id="convert">
 								<div class="form-group">
@@ -70,7 +70,7 @@
 									</select>
 								</div>
 								<div class="form-group">
-									<button type="submit" id="convertAmount"
+									<button type="button" id="convertAmount"
 										onclick="convert(true)" class="btn btn-outline-primary">Convert</button>
 								</div>
 								<div>
