@@ -8,7 +8,9 @@ install:
 script:
 - mvn test
 deploy:
-  provider: heroku
-  api_key:
-    secure: 1064d52f-7372-481f-88d0-3eb6ceedfd23
-  app: currency-co
+   provider: cloudfoundry
+   username: yashv1991@gmail.com
+   password: yA9@verma
+   api: https://api.run.pivotal.io
+   organization: currency-converter-application
+   space: development
