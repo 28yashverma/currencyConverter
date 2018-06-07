@@ -52,14 +52,14 @@
 				<div class="form-group ${error != null ? 'has-error' : ''}">
 					<center>
 						<br>
-						<div class="col-2">
+						<div class="col-md-2">
 							<input type="text" name="username" id="inputUsername"
 								placeholder="User name" class="form-control"
 								onchange="checkLoginUser(username)" />
 						</div>
 
 						<br>
-						<div class="col-2">
+						<div class="col-md-2">
 							<input type="password" name="password" id="inputPassword"
 								placeholder="Password" class="form-control" />
 						</div>
