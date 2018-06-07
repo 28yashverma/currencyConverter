@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,13 +20,17 @@ public class LoginController {
 	private UserService userService;
 
 	@GetMapping("/login")
-	public String login(Model model, String error, String logout) {
+	public String login(@ModelAttribute("message") String val, Model model, String error, String logout) {
 		if (error != null) {
-			model.addAttribute("errorMsg", "Username or password are invalid");
+			model.addAttribute("msg", "Username or password are invalid");
 		}
 
-		if (logout != null) {
+		if (logout != null && !logout.isEmpty()) {
 			model.addAttribute("msg", "Logged out successfully");
+		}
+
+		if (val != null && !val.isEmpty()) {
+			model.addAttribute("msg", val);
 		}
 
 		return "login";

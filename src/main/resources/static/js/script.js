@@ -130,8 +130,8 @@ function getData(passedVal) {
 		success : function(response) {
 			latestRatesList = response;
 			for (var i = 0; i < latestRatesList.length; i++) {
-				lis += latestRatesList[i].currencyName + ":"
-					+ latestRatesList[i].rate + "\n";
+				lis += '<tr><td>' + latestRatesList[i].currencyName + '</td>' + 
+					   '<td>' + latestRatesList[i].rate + '</td></tr>';
 			}
 			console.log(lis);
 
@@ -146,7 +146,7 @@ function getData(passedVal) {
 }
 
 function showData(dataToDisplay) {
-	$('textarea#latestRates').val(dataToDisplay);
+	$('#tbodyCurrency').html(dataToDisplay);
 }
 
 function loadStaticData() {
@@ -230,6 +230,14 @@ function convert(istrue) {
 }
 
 function checkLoginUser(user) {
+	var pwdFldSelector = $('#inputPassword');
+	var loginBtnSelector = $('#btnLogin');
+	pwdFldSelector.prop('disabled', true);
+
+	if (user.value.length === 0) {
+		return;
+	}
+
 	$.ajax({
 		type : "GET",
 		contentType : "application/json",
@@ -237,11 +245,32 @@ function checkLoginUser(user) {
 		dataType : 'text',
 		success : function(response) {
 			showToaster(StatusEnum._INFO, response)
+			if (response === 'Please enter your password') {
+				pwdFldSelector.prop('disabled', false);
+			} else {
+				loginBtnSelector.prop('disabled', true);
+			}
 		},
 		error : function(e) {
 			showToaster(StatusEnum._ERROR, e.responseText);
 		}
 	});
+}
+
+function checkLoginPassword(password) {
+	var pwdFldSelector = $('#inputPassword');
+	var loginBtnSelector = $('#btnLogin');
+	pwdFldSelector.prop('disabled', true);
+	loginBtnSelector.prop('disabled', true);
+
+	if (password.value.length === 0) {
+		pwdFldSelector.prop('disabled', false);
+		return;
+	} else {
+		pwdFldSelector.prop('disabled', false);
+		loginBtnSelector.prop('disabled', false);
+	}
+
 }
 
 var StatusEnum = {
@@ -292,7 +321,8 @@ function loadHistory() {
 		success : function(response) {
 			historyList = response
 			for (var i = 0; i < historyList.length; i++) {
-				lis += '<p class="alert alert-success">' + "Username: " + '<b>' + historyList[i].queryUsername + '</b>' + " " +
+				var count = 10;
+				lis += '<p class="alert alert-success">' + "Query : " + '<b>' + (count - i) + '</b>' + " " +
 					" queried on date: " + '<b>' + new Date(historyList[i].queriedDate) + '</b>' + " " +
 					" conversion from: " + '<b>' + historyList[i].fromCurrency + '</b>' + " " +
 					" of amount: " + '<b>' + historyList[i].amount + '</b>' + " " +
@@ -307,4 +337,19 @@ function loadHistory() {
 			showToaster(StatusEnum._ERROR, e.responseText);
 		}
 	});
+}
+
+
+function loadMessages() {
+	var message = $('#msgDiv span').html();
+	var pwdFldSelector = $('#inputPassword');
+	var usrFldSelector = $('#inputUsername');
+	var loginBtnSelector = $('#btnLogin');
+
+	loginBtnSelector.prop('disabled', true);
+	pwdFldSelector.prop('disabled', true);
+
+	if (message.length !== 0 || message !== '') {
+		showToaster(StatusEnum._INFO, message);
+	}
 }

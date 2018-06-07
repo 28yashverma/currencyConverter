@@ -19,20 +19,30 @@
 	<div class="jumbotron jumbotron-fluid">
 		<div class="container">
 			<div class="row">
-				<div class="col-md-8">
-					<h1 class="display-6">Welcome</h1>
-					<p class="lead">
-						<c:if test="${not empty username}">
-						${username}
-					</c:if>
-					</p>
-					<p class="lead">
-					<form action="/logout" method="post">
-						<button class="btn btn-outline-danger" type="submit">Logout</button>
-						<input type="hidden" name="${_csrf.parameterName}"
-							value="${_csrf.token}" />
-					</form>
-					</p>
+				<div class="col-md-12">
+					<div class="col-md-12">
+						<img style="" alt="Curency Converter Logo" src="CurrencyConverterLogo.png"
+							class="img-fluid" height="200" width="200">
+						<div style="text-align: right; padding-left: 700px; display: inline-table;">
+							<h1 class="display-6">Welcome</h1>
+							<p class="lead">
+								<c:if test="${not empty username}">
+							${username}
+						</c:if>
+							</p>
+
+							<p class="lead">
+							<form action="/logout" method="post">
+								<button class="btn btn-outline-danger" type="submit">Logout</button>
+								<input type="hidden" name="${_csrf.parameterName}"
+									value="${_csrf.token}" />
+							</form>
+							</p>
+						</div>
+					</div>
+
+
+
 
 				</div>
 			</div>
@@ -43,14 +53,24 @@
 			<div class="form-row">
 				<div class="form-group col-md-8">
 					<div id="latestRates" class="form-row">
-						<div>
+						<div class="col-md-4">
 							<button type="submit" onclick="getData('latest')" id="btnLatest"
 								class="btn btn-outline-primary">Latest</button>
 						</div>
 						&nbsp;
-						<div id="textLatestRates">
-							<textarea rows="6" cols="15" id="latestRates"
-								class="form-control" style="border: none;"></textarea>
+						<div class="col-md-6" id="textLatestRates">
+							<table class="table table-striped">
+								<thead>
+									<tr>
+										<th>Currency code</th>
+										<th>Currency rate</th>
+									</tr>
+								</thead>
+								<tbody id="tbodyCurrency">
+								</tbody>
+							</table>
+							<!-- <textarea rows="6" cols="15" id="latestRates"
+								class="form-control" style="border: none;"></textarea> -->
 						</div>
 					</div>
 					<hr>

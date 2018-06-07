@@ -68,12 +68,13 @@
 							</div>
 							<div class="form-group col-md-2">
 								<form:input path="password" type="password"
-									placeholder="Password" class="form-control" />
+									placeholder="Password" class="form-control"
+									onchange="checkPassword(confirmPassword, password)" />
 								<form:errors path="password" cssClass="error" />
 							</div>
 							<div class="form-group col-md-2">
 								<form:input path="confirmPassword" type="password"
-									onblur="checkPassword(confirmPassword, password)"
+									onchange="checkPassword(confirmPassword, password)"
 									class="form-control" placeholder="Confirm Password" />
 								<div id="checkPassword"></div>
 							</div>
@@ -121,7 +122,7 @@
 						<div class="form-row">
 							<div class="form-group col-md-2">
 								<form:input path="zipCode" class="form-control"
-									placeholder="Zipcode" type="number"/>
+									placeholder="Zipcode" type="number" />
 								<form:errors path="zipCode" cssClass="error" />
 							</div>
 						</div>

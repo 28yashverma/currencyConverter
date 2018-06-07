@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.currency.convert.enums.Country;
 import com.currency.convert.model.Role;
@@ -49,7 +50,7 @@ public class RegistrationController {
 	@PostMapping("/register")
 	@Transactional
 	public String register(@Valid @ModelAttribute("registrationForm") User user, BindingResult bindingResult,
-			ModelMap modelMap) {
+			ModelMap modelMap, RedirectAttributes redirectAttributes) {
 
 		Set<Role> roles = new HashSet<>();
 		roles.add(new Role("USER"));
@@ -66,9 +67,10 @@ public class RegistrationController {
 		if (userService.findUserByusername(user.getUsername()) == null) {
 
 			userService.saveUser(user);
-			modelMap.put("userSaveStatus", "Success in saving user information");
-			modelMap.put("username", user.getUsername());
+			modelMap.put("errorMsg", "Success in saving user information");
 			modelMap.put("registrationForm", new User());
+			redirectAttributes.addFlashAttribute("message", "User saved successfully!");
+			return "redirect:/login";
 		} else {
 			modelMap.put("userSaveStatus", "User name already exists");
 		}

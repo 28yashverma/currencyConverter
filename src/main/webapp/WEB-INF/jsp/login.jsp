@@ -28,7 +28,7 @@
 }
 </style>
 </head>
-<body>
+<body onload="loadMessages()">
 	<div class="card text-center">
 		<div class="card-header">
 			<ul class="nav nav-tabs card-header-tabs">
@@ -61,22 +61,19 @@
 						<br>
 						<div class="col-md-2">
 							<input type="password" name="password" id="inputPassword"
-								placeholder="Password" class="form-control" />
+								placeholder="Password" class="form-control"
+								onchange="checkLoginPassword(password)" />
 						</div>
 					</center>
 					<br>
-					<div>
-						<span id="errorMsg">${errorMsg}</span>
-					</div>
-					<br>
 					<div id="btnSubmit">
 						<button type="submit" value="Login"
-							class="btn btn-outline-primary">Login</button>
+							class="btn btn-outline-primary" id="btnLogin">Login</button>
 					</div>
 
 					<br>
-					<div>
-						<span id="msg">${msg}</span>
+					<div id="msgDiv">
+						<span id="msg" style="display: none;">${msg}</span>
 					</div>
 					<div>
 						<input type="hidden" name="${_csrf.parameterName}"
