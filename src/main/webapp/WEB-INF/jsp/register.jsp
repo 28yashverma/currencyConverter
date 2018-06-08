@@ -76,6 +76,7 @@
 								<form:input path="confirmPassword" type="password"
 									onchange="checkPassword(confirmPassword, password)"
 									class="form-control" placeholder="Confirm Password" />
+								<form:errors path="confirmPassword" cssClass="error" />
 								<div id="checkPassword"></div>
 							</div>
 						</div>

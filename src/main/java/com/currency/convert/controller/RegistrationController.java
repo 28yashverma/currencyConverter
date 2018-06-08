@@ -13,7 +13,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -37,6 +39,11 @@ public class RegistrationController {
 	@Autowired
 	private UserValidator userValidator;
 
+	@InitBinder
+	protected void initBinder(WebDataBinder binder) {
+		binder.addValidators(userValidator);
+	}
+
 	@GetMapping("/register")
 	public String register(Map<String, Object> model) {
 		User userForm = new User();
@@ -57,7 +64,7 @@ public class RegistrationController {
 		roles.add(new Role("ADMIN"));
 		user.setRoles(roles);
 
-		userValidator.validate(user, bindingResult);
+		//userValidator.validate(user, bindingResult);
 		modelMap.put("countryList", prepareCountryList());
 
 		if (bindingResult.hasErrors()) {
