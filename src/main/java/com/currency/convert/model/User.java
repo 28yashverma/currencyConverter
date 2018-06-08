@@ -17,6 +17,7 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -25,11 +26,31 @@ import com.currency.convert.enums.Country;
 @Entity
 public class User {
 
+	public User() {
+
+	}
+
+	public User(String username, String email, String password, String confirmPassword, Date dob, String postalAddress,
+			String street, Integer zipcode, String city, Country country, Set<Role> roles) {
+		this.username = username;
+		this.email = email;
+		this.password = password;
+		this.confirmPassword = confirmPassword;
+		this.dateOfBirth = dob;
+		this.postalAddress = postalAddress;
+		this.street = street;
+		this.zipCode = zipcode;
+		this.city = city;
+		this.country = country;
+		this.roles = roles;
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long userId;
 
 	@NotBlank(message = "Please input user name")
+	@Size(min = 6, max = 16)
 	private String username;
 
 	@Email
@@ -38,6 +59,7 @@ public class User {
 	private String email;
 
 	@NotBlank(message = "Please input valid password")
+	@Size(min = 6)
 	private String password;
 
 	@NotBlank(message = "Please input value")

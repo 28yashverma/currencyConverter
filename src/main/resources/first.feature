@@ -1,8 +1,7 @@
 @tag
-Feature: API BDDs
-  I want to use this template for my feature file
+Feature: Saving the user information in the app
 
   @tag1
-  Scenario: This is demo feature test
-    Given I call GET on /login
-    Then the response status is 200
+  Scenario: Successful in saving user informaion
+    Given I try to save the information in database
+    And I am able to save the information
