@@ -16,34 +16,28 @@
 <link href="css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body onload="loadStaticData()">
-	<div class="jumbotron jumbotron-fluid">
+	<div class="jumbotron jumbotron-fluid" style="background: silver;">
 		<div class="container">
 			<div class="row">
-				<div class="col-md-12">
-					<div class="col-md-12">
-						<img style="" alt="Curency Converter Logo" src="CurrencyConverterLogo.png"
-							class="img-fluid" height="200" width="200">
-						<div style="text-align: right; padding-left: 700px; display: inline-table;">
-							<h1 class="display-6">Welcome</h1>
-							<p class="lead">
-								<c:if test="${not empty username}">
-							${username}
-						</c:if>
-							</p>
+				<div class="col-md-4">
+					<h1 class="display-6">Welcome</h1>
+					<p class="lead">
+						<c:if test="${not empty username}">
+						${username}
+					</c:if>
+					</p>
+					<p class="lead">
+					<form action="/logout" method="post">
+						<button class="btn btn-outline-danger" type="submit">Logout</button>
+						<input type="hidden" name="${_csrf.parameterName}"
+							value="${_csrf.token}" />
+					</form>
+					</p>
 
-							<p class="lead">
-							<form action="/logout" method="post">
-								<button class="btn btn-outline-danger" type="submit">Logout</button>
-								<input type="hidden" name="${_csrf.parameterName}"
-									value="${_csrf.token}" />
-							</form>
-							</p>
-						</div>
-					</div>
-
-
-
-
+				</div>
+				<div class="col-md-8">
+					<img alt="Curency Converter Logo" src="CurrencyConverterLogo.png"
+				class="img-fluid" height="200" width="200">
 				</div>
 			</div>
 		</div>
