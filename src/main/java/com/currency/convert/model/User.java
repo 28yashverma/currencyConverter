@@ -14,7 +14,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -22,6 +21,7 @@ import javax.validation.constraints.Size;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.currency.convert.enums.Country;
+import com.currency.convert.validator.Email;
 
 @Entity
 public class User {
@@ -53,7 +53,7 @@ public class User {
 	@Size(min = 6, max = 16)
 	private String username;
 
-	@Email
+	@Email(message = "Email must be of form abc@mail.com")
 	@NotBlank(message = "Please input valid email address")
 	@Column(unique = true)
 	private String email;

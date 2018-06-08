@@ -14,7 +14,7 @@ import com.currency.convert.model.PasswordValidatorBean;
 @RestController
 public class PasswordValidator {
 
-	private static final String PASSWORD_PATTERN = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20})";
+	private static final String PASSWORD_PATTERN = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{8,20})";
 	private Pattern pattern;
 	private Matcher matcher;
 
@@ -38,7 +38,7 @@ public class PasswordValidator {
 			errors.add("Password did not match specified pattern, " + "must contain one digit from 0-9, "
 					+ "must contain one lower case character, " + "must contain one upper case character, "
 					+ "must contain 1 special symbols in the list '@#$%', "
-					+ "length atleast 6 character and maximum 20 characters");
+					+ "length atleast 8 character and maximum 20 characters");
 		}
 
 		return errors;
