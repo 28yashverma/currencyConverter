@@ -16,16 +16,5 @@ Feature: Saving the user information in the app
 	Examples:
 		| username  | password  | confirmPassword | email               | postalAddress | street  | zipcode | city    | country   | dob        |
 		| yeshendra | yA9@verma | yA9@verma       | yashv1991@gmail.com | Chinhat			  | Chinhat | 226028  | Lucknow | INDIA     | 2000-03-01 |
-		| yeshendra | yA9@verma | yA9@verma       | 28yashver@gmail.com | Chinhat			  | Chinhat | 226028  | Lucknow | INDIA     | 2000-03-01 |
-		| yeshendra | yA9@verma | vA9@verma       | yashverma@gmail.com | Chinhat			  | Chinhat | 226028  | Lucknow | INDIA     | 2000-03-01 |
-		| yeshendra | yeshendra | yA9@verma       | yashv1991@gmail.com | Chinhat			  | Chinhat | 226028  | Lucknow | INDIA     | 2000-03-01 |
-		| yeshendra | yA9@verma | yA9@verma       | yashv1991@.com      | Chinhat			  | Chinhat | 226028  | Lucknow | INDIA     | 2000-03-01 |
-		| yeshendra | yA9@verma | yA9@verma       |          @gmail.com | Chinhat			  | Chinhat | 226028  | Lucknow | INDIA     | 2000-03-01 |
-		| yeshendra | yA9@verma | yA9@verma       | yashv1991@gmail.com | Chinhat			  | Chinhat | 226028  | Lucknow | INDIA     | 2000-03-01 |
-		| yeshendra | yA9@verma | yA9@verma       | yashv1991@gmail     | Chinhat			  | Chinhat | 226028  | Lucknow | INDIA     | 2000-03-01 |
-		| yeshendra | yA9@verma | yA9@verma       | yashv1991@gmail.com |       			  | Chinhat | 226028  | Lucknow | INDIA     | 2000-03-01 |
-		| yeshendra | yA9@verma | yA9@verma       | yashv1991@gmail.com | Chinhat			  |         | 226028  | Lucknow | INDIA     | 2000-03-01 |
-		| yeshendra | yA9@verma | yA9@verma       | yashv1991@gmail.com | Chinhat			  | Chinhat | 226028  |         | INDIA     | 2000-03-01 |
-		| yeshendra | yA9@verma | yA9@verma       | yashv1991@gmail.com | Chinhat			  | Chinhat | 226028  | Lucknow |           | 2000-03-01 |
-		|           | yA9@verma | yA9@verma       | yashv1991@gmail.com | Chinhat			  | Chinhat | 226028  | Lucknow | INDIA     | 2000-03-01 |
-		| yeshendra | yA9@verma | yA9@verma       |                     | Chinhat			  | Chinhat | 226028  | Lucknow | INDIA     | 2000-03-01 |
+		| yeshendrk | yA9@verma | yA9@verma       | 28yashver@gmail.com | Chinhat			  | Chinhat | 226028  | Lucknow | INDIA     | 2000-03-01 |
+		| yeshendrv | yA9@verma | vA9@verma       | yashverma@gmail.com | Chinhat			  | Chinhat | 226028  | Lucknow | INDIA     | 2000-03-01 |
