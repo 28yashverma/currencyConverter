@@ -10,6 +10,11 @@ import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+/**
+ * 
+ * @author yeshendra Entity class for Queries
+ *
+ */
 @Entity
 public class Queries {
 

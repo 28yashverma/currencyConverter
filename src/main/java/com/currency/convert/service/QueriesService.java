@@ -6,6 +6,10 @@ import java.util.List;
 
 import com.currency.convert.model.Queries;
 
+/**
+ * @author yeshendra service
+ *
+ */
 public interface QueriesService {
 
 	void saveQuery(String username, Date queriedDate, String currencyFrom, String currencyTo, BigDecimal rate,

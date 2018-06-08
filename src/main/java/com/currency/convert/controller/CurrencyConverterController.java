@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.Cacheable;
@@ -27,9 +29,16 @@ import com.currency.convert.model.Queries;
 import com.currency.convert.service.CurrencyRatesService;
 import com.currency.convert.service.QueriesService;
 
+/**
+ * 
+ * @author yeshendra Currency exchange api controller
+ *
+ */
 @RestController
 @PropertySource("api.properties")
 public class CurrencyConverterController {
+
+	private static final Logger logger = LoggerFactory.getLogger(CurrencyConverterController.class);
 
 	@Autowired
 	private QueriesService queriesService;
@@ -57,6 +66,7 @@ public class CurrencyConverterController {
 	@GetMapping("/latest")
 	@Cacheable(value = "latest")
 	public List<CurrencyRates> getLatestRates(ModelMap modelMap) {
+		logger.info("Getting the latest currency rates");
 		List<CurrencyRates> currencyMap = new ArrayList<>();
 		CurrencyExchange exchange = restTemplate.getForEntity(latestExchangeRates, CurrencyExchange.class).getBody();
 		for (Entry<String, Double> m : exchange.getRates().entrySet()) {
@@ -87,6 +97,7 @@ public class CurrencyConverterController {
 			}
 
 			for (CurrencyRates rates : currencyMap) {
+				logger.info("Saving latest currency rates");
 				currencyRatesService.save(rates);
 			}
 
@@ -96,12 +107,14 @@ public class CurrencyConverterController {
 
 	@GetMapping("/currencies")
 	public List<String> currenciesList() {
+		logger.info("Getting the list of currencies");
 		return Currency.getListOfCurrencies();
 	}
 
 	@GetMapping("/convert/{amount}/{fromCurrency}/{toCurrency}")
 	public BigDecimal convertedCurrency(Principal principal, @PathVariable String amount,
 			@PathVariable String fromCurrency, @PathVariable String toCurrency) {
+		logger.info("Convert from " + fromCurrency + " to " + toCurrency);
 		rates = currencyRatesService.findAll();
 		BigDecimal result = BigDecimal.ZERO;
 		BigDecimal currencyRate = BigDecimal.ZERO;
@@ -123,7 +136,7 @@ public class CurrencyConverterController {
 		}
 		currencyRate = mapRates.get(toCurrency).divide(mapRates.get(fromCurrency), 3, RoundingMode.FLOOR);
 		result = localAmount.multiply(currencyRate);
-
+		logger.info("Converted amount is : " + result);
 		queriesService.saveQuery(principal.getName(), new Date(), fromCurrency, toCurrency, currencyRate,
 				result.toPlainString(), localAmount);
 
@@ -132,6 +145,7 @@ public class CurrencyConverterController {
 
 	@GetMapping("/list")
 	public List<Queries> listQueries(Principal principal) throws Exception {
+		logger.info("Getting the history of queries made by user");
 		String username = principal.getName();
 		if (username.isEmpty()) {
 			throw new Exception("User name is empty");

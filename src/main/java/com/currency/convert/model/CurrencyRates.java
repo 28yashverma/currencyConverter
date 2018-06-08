@@ -5,6 +5,11 @@ import java.math.BigDecimal;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+/**
+ * 
+ * @author yeshendra Entity class for Currency rates
+ *
+ */
 @Entity
 public class CurrencyRates {
 

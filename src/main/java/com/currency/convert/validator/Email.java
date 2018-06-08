@@ -8,6 +8,10 @@ import java.lang.annotation.RetentionPolicy;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
+/**
+ * @author yeshendra custom validation for email
+ *
+ */
 @Documented
 @Constraint(validatedBy = EmailValidator.class)
 @Target({ ElementType.METHOD, ElementType.FIELD })

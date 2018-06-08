@@ -15,6 +15,10 @@ import com.currency.convert.model.Role;
 import com.currency.convert.model.User;
 import com.currency.convert.repository.UserRepository;
 
+/**
+ * @author yeshendra spring security entry point for loading user data
+ *
+ */
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 

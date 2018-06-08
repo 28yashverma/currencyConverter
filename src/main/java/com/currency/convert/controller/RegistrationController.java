@@ -8,6 +8,8 @@ import java.util.Set;
 
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,8 +32,15 @@ import com.currency.convert.model.User;
 import com.currency.convert.service.UserService;
 import com.currency.convert.validator.UserValidator;
 
+/**
+ * 
+ * @author yeshendra Controller
+ *
+ */
 @Controller
 public class RegistrationController {
+
+	private static final Logger logger = LoggerFactory.getLogger(RegistrationController.class);
 
 	@Autowired
 	private UserService userService;
@@ -46,6 +55,7 @@ public class RegistrationController {
 
 	@GetMapping("/register")
 	public String register(Map<String, Object> model) {
+		logger.info("registration form init");
 		User userForm = new User();
 		model.put("registrationForm", userForm);
 
@@ -64,7 +74,7 @@ public class RegistrationController {
 		roles.add(new Role("ADMIN"));
 		user.setRoles(roles);
 
-		//userValidator.validate(user, bindingResult);
+		// userValidator.validate(user, bindingResult);
 		modelMap.put("countryList", prepareCountryList());
 
 		if (bindingResult.hasErrors()) {
@@ -72,16 +82,17 @@ public class RegistrationController {
 		}
 
 		if (userService.findUserByusername(user.getUsername()) == null) {
-
 			userService.saveUser(user);
 			modelMap.put("errorMsg", "Success in saving user information");
 			modelMap.put("registrationForm", new User());
 			redirectAttributes.addFlashAttribute("message", "User saved successfully!");
+			logger.info("Registration successful");
 			return "redirect:/login";
 		} else {
 			modelMap.put("userSaveStatus", "User name already exists");
 		}
 
+		logger.info("registration in pending state");
 		return "register";
 	}
 
@@ -98,7 +109,7 @@ public class RegistrationController {
 	@RequestMapping(method = RequestMethod.GET, value = "/checkUser/{username}", produces = "application/json")
 	@ResponseBody
 	public String checkUsernamePresence(@PathVariable(value = "username", required = true) String username) {
-
+		logger.info("check for user availability");
 		if (username.length() < 0) {
 			return "user name is empty";
 		}
@@ -116,6 +127,7 @@ public class RegistrationController {
 	@RequestMapping(method = RequestMethod.GET, value = "/checkEmail/{email}", produces = "application/json")
 	public String validateEmail(@PathVariable(value = "email") String email) {
 		String result = "";
+		logger.info("finding user by email");
 		User u = userService.findUserByEmail(email);
 		if (u != null) {
 			result = "Email already in use";

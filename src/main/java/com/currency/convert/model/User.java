@@ -23,6 +23,10 @@ import org.springframework.format.annotation.DateTimeFormat;
 import com.currency.convert.enums.Country;
 import com.currency.convert.validator.Email;
 
+/**
+ * @author yeshendra Entity class for User
+ *
+ */
 @Entity
 public class User {
 

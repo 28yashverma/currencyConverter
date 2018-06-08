@@ -1,5 +1,10 @@
 package com.currency.convert.model;
 
+/**
+ * 
+ * @author yeshendra password validator bean
+ *
+ */
 public class PasswordValidatorBean {
 
 	public PasswordValidatorBean() {

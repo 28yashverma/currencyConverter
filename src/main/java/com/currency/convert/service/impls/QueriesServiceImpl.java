@@ -12,6 +12,10 @@ import com.currency.convert.model.builder.QueriesBuilder;
 import com.currency.convert.repository.QueriesRepository;
 import com.currency.convert.service.QueriesService;
 
+/**
+ * @author yeshendra ServiceImpl
+ *
+ */
 @Service
 public class QueriesServiceImpl implements QueriesService {
 

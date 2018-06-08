@@ -8,6 +8,11 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+/**
+ * 
+ * @author yeshendra Addtional WebConfiguration
+ *
+ */
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
 

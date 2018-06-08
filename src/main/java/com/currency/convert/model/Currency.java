@@ -1,5 +1,8 @@
 package com.currency.convert.model;
 
+/**
+ * 
+ */
 import java.util.ArrayList;
 import java.util.List;
 

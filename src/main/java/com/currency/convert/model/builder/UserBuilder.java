@@ -1,5 +1,8 @@
 package com.currency.convert.model.builder;
 
+/**
+ * Builder pattern for User class
+ */
 import java.util.Date;
 import java.util.Set;
 

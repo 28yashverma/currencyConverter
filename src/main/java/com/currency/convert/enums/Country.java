@@ -1,5 +1,10 @@
 package com.currency.convert.enums;
 
+/**
+ * 
+ * @author yeshendra ENUM constants
+ *
+ */
 public enum Country {
 
 	INDIA("IND", "INDIA"), GERMANY("GER", "GERMANY"), AUSTRALIA("AUS", "AUSTRALIA"), USA("USA",

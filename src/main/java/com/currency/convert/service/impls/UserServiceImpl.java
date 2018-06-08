@@ -8,6 +8,10 @@ import com.currency.convert.model.User;
 import com.currency.convert.repository.UserRepository;
 import com.currency.convert.service.UserService;
 
+/**
+ * @author yeshendra service impl
+ *
+ */
 @Service
 public class UserServiceImpl implements UserService {
 

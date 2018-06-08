@@ -11,6 +11,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.currency.convert.model.PasswordValidatorBean;
 
+/**
+ * 
+ * @author yeshendra Controller
+ *
+ */
 @RestController
 public class PasswordValidator {
 

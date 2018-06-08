@@ -13,6 +13,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.currency.convert.service.impls.UserDetailsServiceImpl;
 
+/**
+ * @author yeshendra Security configuration
+ */
 @EnableWebSecurity
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -29,13 +32,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
-		// http.csrf().requireCsrfProtectionMatcher(new
-		// AntPathRequestMatcher("**/login")).and().authorizeRequests()
-		// .antMatchers("/hello", "/latest", "/convert/**", "/currencies",
-		// "/saveQueries", "/list/**")
-		// .authenticated().and().formLogin().defaultSuccessUrl("/hello").loginPage("/login").and().logout()
-		// .permitAll();
-
 		http.csrf().disable().authorizeRequests()
 				.antMatchers("/hello", "/latest", "/convert/**", "/currencies", "/saveQueries", "/list/**")
 				.authenticated().and().formLogin().defaultSuccessUrl("/hello").loginPage("/login").and().logout()

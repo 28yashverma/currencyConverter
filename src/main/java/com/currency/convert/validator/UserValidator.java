@@ -1,9 +1,5 @@
 package com.currency.convert.validator;
 
-import java.util.Locale;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
@@ -11,6 +7,10 @@ import org.springframework.validation.Validator;
 
 import com.currency.convert.model.User;
 
+/**
+ * @author yeshendra validator for password
+ *
+ */
 @Component
 public class UserValidator implements Validator {
 

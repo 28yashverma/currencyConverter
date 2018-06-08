@@ -1,5 +1,7 @@
 package com.currency.convert.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,8 +15,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.currency.convert.model.User;
 import com.currency.convert.service.UserService;
 
+/**
+ * 
+ * @author yeshendra Controller
+ *
+ */
 @Controller
 public class LoginController {
+
+	private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 
 	@Autowired
 	private UserService userService;
@@ -22,14 +31,17 @@ public class LoginController {
 	@GetMapping("/login")
 	public String login(@ModelAttribute("message") String val, Model model, String error, String logout) {
 		if (error != null) {
+			logger.warn("Invalid username or password");
 			model.addAttribute("msg", "Username or password are invalid");
 		}
 
 		if (logout != null && !logout.isEmpty()) {
+			logger.info("Logged out");
 			model.addAttribute("msg", "Logged out successfully");
 		}
 
 		if (val != null && !val.isEmpty()) {
+			logger.info(val);
 			model.addAttribute("msg", val);
 		}
 

@@ -2,6 +2,10 @@ package com.currency.convert.model;
 
 import java.util.Map;
 
+/**
+ * @author yeshendra
+ *
+ */
 public class CurrencyExchange {
 
 	private String disclaimer;

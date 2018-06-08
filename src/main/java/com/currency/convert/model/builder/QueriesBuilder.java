@@ -1,5 +1,8 @@
 package com.currency.convert.model.builder;
 
+/**
+ * Builder pattern for Queries Class
+ */
 import java.math.BigDecimal;
 import java.util.Date;
 

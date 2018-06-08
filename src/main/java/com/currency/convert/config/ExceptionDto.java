@@ -1,5 +1,10 @@
 package com.currency.convert.config;
 
+/**
+ * 
+ * @author yeshendra
+ *
+ */
 public class ExceptionDto {
 	private String code;
 	private String message;
