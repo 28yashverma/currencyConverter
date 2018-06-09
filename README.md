@@ -1,23 +1,48 @@
-# currencyConverter
+# Project Title
+
 This is a currency converter application consuming exposed api's by various end points on the internet
 
-#Steps to build this application
-As this application is already hosted on Pivotal Cloud Foundry, only a commit is necessary to push up the changes to the repo
-From the repo it is picked up via Travis CI which in an Integration platform
+## Prerequisites
 
-Travis CI builds up the project and push it to the Cloud foundry platform
+* JDK 1.7+ preferable 1.8 + versions
+* Maven 3+
+* IDE (STS preferable)
 
-The URL of the application is - 
+## Installing
 
-#Alternate run of the application - 
-If you need to run this application locally on system for development or enhancement purposes 
+* Import the project 
+* Run as Maven Install (Make sure you have the JDK in your build path)
 
-1) Import the project 
-2) Run as Maven Install (Make sure you have the JDK in your build path)
-3) Run as Spring boot application or normal Java Application since this is an boot application
-4) If you need to run this on a separate tomcat
-5) Make sure the spring-boot-starter-tomcat dependency scope is 'provided' and packaging is set as WAR
-6) After Maven Install you can find the WAR for this application in target folder
-7) Copy that war file into the webapps section of tomcat
-8) start tomcat 
+## Running the tests
 
+* mvn test
+
+## Deployment
+
+* Run as Spring boot application or normal Java Application since this is an boot application
+* If you need to run this on a separate tomcat
+* Make sure the spring-boot-starter-tomcat dependency scope is 'provided' and packaging is set as WAR
+* After Maven Install you can find the WAR for this application in target folder
+* Copy that war file into the webapps section of tomcat
+* start tomcat
+
+## Built With
+
+* [Spring Boot]
+* [Maven]
+* [Bootstrap]
+* [Spring Security]
+* [H2 Database]
+* [HTML]
+* [JSP]
+* [JQuery]
+* [JavaScript]
+* [EhCache]
+* [Cucumber]
+
+# URL for the application - 
+## https://currency-converter-application.cfapps.io/
+
+## Authors
+
+* **Yehendra Kumar Verma**  
