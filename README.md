@@ -1,4 +1,4 @@
-# Project Title
+# Currency Converter Application
 
 This is a currency converter application consuming exposed api's by various end points on the internet
 
