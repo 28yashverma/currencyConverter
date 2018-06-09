@@ -21,6 +21,7 @@ import javax.validation.constraints.Size;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.currency.convert.enums.Country;
+import com.currency.convert.validator.BDate;
 import com.currency.convert.validator.Email;
 
 /**
@@ -72,6 +73,7 @@ public class User {
 	@Temporal(TemporalType.DATE)
 	@NotNull(message = "Date of birth cannot be left blank")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@BDate(message = "Birthdate should be between 31-03-1960 to 31-03-2000")
 	private Date dateOfBirth;
 
 	@NotBlank(message = "Postal address cannot be blank")

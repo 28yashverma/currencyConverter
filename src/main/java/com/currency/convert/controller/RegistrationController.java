@@ -69,6 +69,7 @@ public class RegistrationController {
 	public String register(@Valid @ModelAttribute("registrationForm") User user, BindingResult bindingResult,
 			ModelMap modelMap, RedirectAttributes redirectAttributes) {
 
+		logger.info("setting user default roles for all");
 		Set<Role> roles = new HashSet<>();
 		roles.add(new Role("USER"));
 		roles.add(new Role("ADMIN"));
@@ -84,7 +85,6 @@ public class RegistrationController {
 		if (userService.findUserByusername(user.getUsername()) == null) {
 			userService.saveUser(user);
 			modelMap.put("errorMsg", "Success in saving user information");
-			modelMap.put("registrationForm", new User());
 			redirectAttributes.addFlashAttribute("message", "User saved successfully!");
 			logger.info("Registration successful");
 			return "redirect:/login";
