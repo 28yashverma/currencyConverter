@@ -321,9 +321,8 @@ function loadHistory() {
 		success : function(response) {
 			historyList = response
 			for (var i = 0; i < historyList.length; i++) {
-				var count = 10;
-				lis += '<p class="alert alert-success">' + "Query : " + '<b>' + (count - i) + '</b>' + " " +
-					" queried on date: " + '<b>' + new Date(historyList[i].queriedDate) + '</b>' + " " +
+				lis += '<p class="alert alert-success">' +
+					" Queried at : " + '<b>' + new Date(historyList[i].queriedDate) + '</b>' + " " +
 					" conversion from: " + '<b>' + historyList[i].fromCurrency + '</b>' + " " +
 					" of amount: " + '<b>' + historyList[i].amount + '</b>' + " " +
 					" to currency: " + '<b>' + historyList[i].toCurrency + '</b>' +
