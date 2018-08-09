@@ -46,4 +46,3 @@ This is a currency converter application consuming exposed api's by various end 
 ## Authors
 
 * **Yehendra Kumar Verma**  
-
