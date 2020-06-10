@@ -7,10 +7,9 @@ script:
 - mvn test
 deploy:
   provider: cloudfoundry
-  username: yashv1991@gmail.com
-  password:
-    secure: JWONYoU5ZKTjHu9wnePXNdcRKZZ8t7FEE5bylQWufySuUfRCQ0kKdvbkhiGtq5WFYzxkqsocu6Trjnz8osG3VByZHUfiA/j/tI+Fn5LYuev/2ryR+jHPvD/jMY7F4ZNFB1XfuuSYNu4DYivaLxywKXXUlWTukXr8Tmx7mHiMlpd71rKccJW1/JlwpbhJGdSdMrtAuwAMcsyFIkA8qnGnqK4xdZuuNbyzoiIu0JnZoCOPz8FHgKSjDAjk/qLqCj30WQz+St8sFon2W7fmsIAquYzHAux0IaiVkrFkWUlENoBlYEsY4Q6jZQH8Z+XFtytP8NCFmz60GLbHU0594eWbveFbipyVJkVlCiY1i6hJQ0o6zzo4NLxBCimKIgvpYPeYy0tGa9FenSGeJRjR0V6uJMsKpXA7lMDp3yoJiw3+G86vUUMX6gyfIv1NHtsH7AhttaIv2ELeXf2G65X8b9bcDKMCxploRdDsQva4no26v27gSxS5PBhpW1USTugB+amCKOXqw6x6q8lNFrXaBjC2kkyn7Lf/ewuXE/F6IwxFDtODelJdBPzXCN0BuV/tAjpQJM3GEpjaX5DHny/5RmTn6rJcTuY4TTQ9qzhi0UYbhLO58VAQL36Y27i3oNkGTtGE9FPk/BGv7EK/HnHe8acRrFaHPCjKAxU0Jm+l8U8ukMo=
+  username: rinivermais158@gmail.com
+  password: cloudF0u&ry
   api: https://api.run.pivotal.io
-  organization: currency-converter-application
+  organization: currency-converter-app
   space: development
   buildpack: https://github.com/cloudfoundry/java-buildpack
