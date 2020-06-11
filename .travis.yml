@@ -9,7 +9,7 @@ script:
 deploy:
   provider: cloudfoundry
   username: rinivermais158@gmail.com
-  password: cloudF0u&ry
+  password: sA9@verma
   api: https://api.run.pivotal.io
   organization: currency-converter-app
   space: development
