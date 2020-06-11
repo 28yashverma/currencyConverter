@@ -9,8 +9,7 @@ script:
 deploy:
   provider: cloudfoundry
   username: rinivermais158@gmail.com
-  password: 
-    secure: K5PDc1RlfaE4Yr/CbfXB1CNqdULCn3F9lKpUeL1SEonzUfcObAV89fw5DgEcndlMoSa7bWols72kaIg4wU+deTTsdctUT8LLDULa4AUIoOUPhSaw43JwKvCxYX8lnKgPbnTL/vyUrr5RiUGTr5ky0/NO9j4XPs6HB7IQ6UaB8+0Vig4diiX5t15Nki4G0c8fn0ZkTIyZtKzR860vhOD1G/yPfoOTmPksKmCjFSLlliLPD8+EiKMOUPt+Nc7Ql+L66wE3Dt9tlw4D89RiSIyobU1lCmiyTO621FM6Ri9HRU+IrJ2BumAvOsKXIyTrIl4INSsp42Opi46G+ohPV06OnqZvBHG5y7fBK1K5tPY2jpqjJ3ph2xMEksNd18XAz1PwdvDwaDpxr2LPMzg5E0DsuvMSIXUVNpZ8Z1b1X2bHKB0mkKdtXoE+tN0TIZYW9vz/HL0Dz1hK75yyEQXjwzWYKLDvLGwCNUDSEaMtmFA9CvBun56D15j4hXNx/m9R9IDfQ3r47XmFKrIKEUYMcJI/lvgCQnYeW/cOWn2lsozr86ZAlNSDGYYrTKHCVTyHR1F2sGkSqGB6VjtZAbm46YTl8SLwcVaULivj/WRrAkfCUWF0mb77e126m2vIDU8yguubP2BmmGKTus+Qc9yVA+ETmCoYalr7apKIvs/ufjHt8nY=
+  password: cloudF0u&ry
   api: https://api.run.pivotal.io
   organization: currency-converter-app
   space: development
