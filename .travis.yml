@@ -5,7 +5,6 @@ install:
 - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 script:
 - mvn package
-- 
 deploy:
   provider: cloudfoundry
   username: rinivermais158@gmail.com
