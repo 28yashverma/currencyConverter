@@ -45,7 +45,7 @@ public class HomeController {
 
 	@GetMapping("/hello")
 	public String hello(Principal principal, ModelMap model) {
-		logger.info("Loading the main screen");
+		logger.info("Loading the main screen"); 
 		String username = "";
 		if (principal != null) {
 			logger.info("User name : " + principal.getName());
